@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('config.php');
 
 $app['controller'] = @$_GET['controller'];
