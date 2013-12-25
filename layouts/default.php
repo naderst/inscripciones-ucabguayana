@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8"> 
+		<title></title>
 	</head>
 	<body>
 		<?php
@@ -11,7 +13,7 @@
 			if(!@include_once('modulos/'.str_replace('-', '_', $app['controller']).'/'.$app['action'].'.php'))
 				require_once('modulos/errors/404.php');
 		?>
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<?php echo '<script src="'.$app['basedir'].'/js/jquery-1.10.2.min.js"></script>'; ?>
 		<script>basedir = '<?php echo $app['basedir']; ?>';</script>
 		<?php
 			if($app['controller'] == 'horario')
