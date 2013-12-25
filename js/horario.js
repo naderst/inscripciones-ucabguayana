@@ -1,6 +1,18 @@
 $(document).ready(function(){
+	$('.horario').hide();
+	$('#status').hide();
+	$('#status').html('Cargando...');
 	$.ajax({
 		url: basedir + '/json/horario.php',
+		beforeSend: function() {
+			$('#status').show();
+		},
+		complete: function() {
+			$('#status').hide();
+		},
+		error: function() {
+			alert('Ocurrió un error cargando el horario.');
+		},
 		success: function(json) {
 			var colores = ['m1', 'm2', 'm3', 'm4', 'm5'];
 			var dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
@@ -24,8 +36,6 @@ $(document).ready(function(){
 						horario[k][jk] = [parseInt(i), -1];
 				}
 
-			console.log(horario);
-
 			var html = '';
 
 			for(var i = 0; i < horario.length - 1; ++i) {
@@ -43,6 +53,7 @@ $(document).ready(function(){
 			}
 
 			$('.horario').append(html);
+			$('.horario').show();
 		}
 	});
 });
