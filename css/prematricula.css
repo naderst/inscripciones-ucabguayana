@@ -1,0 +1,142 @@
+@charset "utf-8";
+
+/*  Sistema de prematrícula - UCAB Guayana
+    Tema: Prematícula
+    Tema URL: http://github.com/naderst/inscripciones-ucabguayana
+    Autores: https://github.com/naderst/inscripciones-ucabguayana/graphs/contributors
+    Version: 1.0
+*/
+
+* {
+    margin: 0;
+    padding: 0
+}
+body {
+    font-family: 'Open Sans', sans-serif
+}
+i {
+    margin: 0 4px;
+}
+#header {
+    background-color: #F0F0F0;
+    background-image: linear-gradient(#F6F6F6, #F0F0F0);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #DDD;
+    height: 45px
+}
+#header .contenedor {
+    padding-top: 11px
+}
+#prematricula {
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px 2px #EEE;
+    list-style: none;
+}
+#prematricula li a {
+    background-image: linear-gradient(#F8F8F8, #F0F0F0);
+    border-top: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    color: #333;
+    display: block;
+    font-weight: 700;
+    padding: 8px 6px;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #FFF
+}
+#prematricula li a:hover {
+    color: #FFF;
+    background-image: linear-gradient(#14B4F0, #13A9E0);
+    /*
+    background-image: linear-gradient(#FFD004, #F2C604);
+    background-image: linear-gradient(#006225, #004C1D);
+*/
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7)
+}
+#prematricula li i {
+    font-size: 1.3em;
+    position: absolute;
+    top: 0.4em;
+    right: 0.3em;
+}
+#prematricula li:first-child a {
+    border-radius: 6px 6px 0 0
+}
+#prematricula li:last-child a {
+    border-radius: 0 0 6px 6px;
+    border-bottom: 1px solid #DDD
+}
+#footer {
+    background-color: #F6F6F6;
+    border-top: 1px solid #F0F0F0;
+    text-align:right;
+    font-weight:300;
+    min-height:100%;
+    height:100%;
+    padding:10px 0;
+}
+#maia-signature {
+    clear: both;
+    margin: 120px auto 0;
+    max-width: 980px;
+    min-height: 5px;
+}
+#maia-signature:before,
+[dir=rtl] #maia-signature:after {
+    border-left: 35px solid #006225;
+}
+#maia-signature:after,
+[dir=rtl] #maia-signature:before {
+    border-left: 34px solid #FFD100;
+    border-right: 35px solid #12B6EB;
+}
+#maia-signature:after,
+#maia-signature:before {
+    content: "";
+    float: right;
+    height: 5px;
+}
+.separador {
+    background: #FFF;
+    border-bottom: 1px solid #F0F0F0;
+    margin-top: 10px;
+    padding: 12px 6px
+}
+.contenido {
+    padding: 15px 6px
+}
+.contenedor {
+    margin: 0 auto;
+    max-width: 980px
+}
+.menu a {
+    color: #333;
+    font-size: 1em;
+    font-weight: 700;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #FFF
+}
+.menu a:hover {
+    color: #14B4F0;
+}
+.menu .usuario {
+    float: right;
+}
+.menu .usuario a {
+    font-weight: 300;
+}
+.titulo {
+    font-weight: 300;
+    word-wrap: break-word;
+}
+.fix {
+    clear: both
+}
+nav ul {
+    list-style: none
+}
+nav ul.inline li {
+    display: inline-block;
+    padding: 0 4px
+}
