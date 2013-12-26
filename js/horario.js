@@ -40,7 +40,7 @@ $(document).ready(function () {
 
             for (var i = 0; i < horario.length - 1; ++i) {
                 html += '<tr>';
-                html += '<td class="hora">' + horas[i] + '</td>';
+                html += '<td class="hora">' + horas[i].substr(0,5) + '</td>';
 
                 for (var j = 0; j < horario[i].length; ++j) {
                     if (horario[i][j] == undefined)

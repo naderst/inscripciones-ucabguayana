@@ -166,10 +166,11 @@ nav ul.inline li {
 .horario th {
     text-align: center;
     font-weight: bold;
+    font-size: 12px !important;
 }
 .horario td {
     text-align: center;
-    font-size: 11px;
+    font-size: 9px;
     width: 150px;
 }
 .horario tr:nth-child(even) td {
@@ -177,11 +178,12 @@ nav ul.inline li {
     border-top: 1px dashed #95a5a6;
 }
 .horario .materia {
-    font-size: 11px !important
+    font-size: 9px !important
 }
 .horario .hora {
-    font-size: 12px !important;
+    font-size: 10px !important;
     font-weight: bold;
+    content: ';a';
 }
 .horario .m1 {
     background-color: #3498db
@@ -197,4 +199,15 @@ nav ul.inline li {
 }
 .horario .m5 {
     background-color: #c0392b
+}
+@media only screen and (min-width: 520px) {
+   .horario .materia {
+       font-size: 14px !important
+   }
+   .horario th {
+       font-size: 16px !important
+   }
+   .horario .hora {
+       font-size: 14px !important
+   }
 }
