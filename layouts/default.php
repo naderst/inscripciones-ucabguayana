@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Ingreso de prematrícula</title>
+    <title>Prematrícula - UCAB Guayana</title>
     <meta name="robots" content="noodp, noydir" />
-    <meta name="description" content="Selecciona las materias que deseas cursar este semestre." />
+    <meta name="description" content="Ingreso de prematrícula y consulta de horario." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <link href='<?php echo $app['basedir'].'/css/prematricula.css'; ?>' rel='stylesheet' type='text/css'>
