@@ -6,6 +6,7 @@
     Autores: https://github.com/naderst/inscripciones-ucabguayana/graphs/contributors
     Version: 1.0
 */
+
 #prematricula {
     border-radius: 6px;
     box-shadow: 1px 1px 5px 2px #EEE;
@@ -46,11 +47,11 @@
     width: 100%;
 }
 #futuros-semestres ul {
-    background-color: #003c17;
+    background-color: #095470;
     border-radius: 6px;
     color: #FFF;
     float: left;
-    margin: 1% 1%;
+    margin: 2% 1%;
     width: 98%;
     list-style: none;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
@@ -59,20 +60,21 @@
     padding: 5px;
 }
 #futuros-semestres ul li:first-child {
-    background-image: linear-gradient(#006225, #004C1D);
-    border-bottom: 4px solid #006225;
+    background-image: linear-gradient(#0F7FAB, #0C6D91);
+    border-bottom: 4px solid #0F7FAB;
     border-radius: 6px 6px 0 0;
     font-weight: 700;
     text-align: center;
 }
 #futuros-semestres ul li:last-child {
-    background-color: #006225;
-    border-radius:0 0 6px 6px;
-    font-size:0.85em;
+    background-color: #0F7FAB;
+    border-radius: 0 0 6px 6px;
+    font-size: 0.85em;
 }
 @media only screen and (min-width: 540px) {
     #futuros-semestres ul {
         width: 48%;
+        margin: 1% 1%;
     }
 }
 @media only screen and (min-width: 800px) {

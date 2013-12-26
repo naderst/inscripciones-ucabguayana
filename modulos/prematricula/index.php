@@ -45,7 +45,7 @@
 </article>
 <section class="separador">
     <div class="contenedor">
-        <h1 class="titulo">Futuros semestres™</h1>
+        <h1 class="titulo">Futuros semestres</h1>
     </div>
 </section>
 <article class="contenido">
