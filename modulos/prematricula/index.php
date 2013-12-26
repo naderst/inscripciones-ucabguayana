@@ -7,36 +7,38 @@
     <div class="contenedor">
         <ul id="prematricula">
             <li>
-                <a data-codigo="1" href="javascript:void(0)">Materia 1
+                <a data-codigo="1" data-creditos="1" href="javascript:void(0)">Materia 1
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
             <li>
-                <a data-codigo="2" href="javascript:void(0)">Materia 2
+                <a data-codigo="2" data-creditos="2" href="javascript:void(0)">Materia 2
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
             <li>
-                <a data-codigo="3" href="javascript:void(0)">Materia 3
+                <a data-codigo="3" data-creditos="3" href="javascript:void(0)">Materia 3
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
             <li>
-                <a data-codigo="4" href="javascript:void(0)">Materia 4
+                <a data-codigo="4" data-creditos="4" href="javascript:void(0)">Materia 4
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
             <li>
-                <a data-codigo="5" href="javascript:void(0)">Materia 5
+                <a data-codigo="5" data-creditos="5" href="javascript:void(0)">Materia 5
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
         </ul>
+        <p id="creditos" class="small">
+            <i class="fa fa-bookmark-o"></i>Créditos a cursar: 0</p>
         <a id="enviar-prematricula" class="boton" href="javascript:void(0)">Enviar</a>
         <div class="fix"></div>
     </div>

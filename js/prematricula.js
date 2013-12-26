@@ -6,17 +6,25 @@
         Requiere jQuery 1.9.1
 */
 var materiasSeleccionadas = [];
+var creditos = 0;
+
+function actualizarCreditos() {
+    $('#creditos').html('<i class="fa fa-bookmark-o"></i>Créditos a cursar: ' + creditos);
+}
 
 function materiaSeleccionada(materia) {
     if (materia.children('i').hasClass('fa-circle-o')) {
         materia.children('i').removeClass('fa-circle-o');
         materia.children('i').addClass('fa-check-circle-o');
         materiasSeleccionadas.push(materia.attr('data-codigo'));
+        creditos += parseInt(materia.attr('data-creditos'));
     } else {
         materia.children('i').removeClass('fa-check-circle-o');
         materia.children('i').addClass('fa-circle-o');
         materiasSeleccionadas.splice(materiasSeleccionadas.indexOf(materia.attr('data-codigo')), 1);
+        creditos -= parseInt(materia.attr('data-creditos'));
     }
+    actualizarCreditos();
 }
 
 function enviarPrematricula() {
