@@ -19,6 +19,15 @@ body {
 i {
     margin: 0 4px;
 }
+p {
+    margin-top: 15px;
+}
+p.small {
+    background-color: #F3F3F3;
+    display: block;
+    padding: 5px;
+    font-size: 0.85em;
+}
 nav ul {
     list-style: none
 }
@@ -37,8 +46,8 @@ nav ul.inline li {
     padding-top: 11px
 }
 #footer {
-    background-color: #F6F6F6;
-    border-top: 1px solid #F0F0F0;
+    background-color: #F4F4F4;
+    border-top: 1px solid #EAEAEA;
     text-align: right;
     font-weight: 300;
     min-height: 100%;
@@ -90,10 +99,7 @@ nav ul.inline li {
     color: #14B4F0;
 }
 .menu .usuario {
-    float: right;
-}
-.menu .usuario a {
-    font-weight: 300;
+    display: none;
 }
 .titulo {
     font-weight: 300;
@@ -101,7 +107,7 @@ nav ul.inline li {
 }
 .boton {
     background-image: linear-gradient(#14B4F0, #13A9E0);
-    border:1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     box-shadow: 1px 1px 5px 1px #DDD;
     color: #FFF;
@@ -109,6 +115,8 @@ nav ul.inline li {
     float: right;
     margin-top: 15px;
     padding: 8px 6px;
+    text-align: center;
+    text-decoration: none;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7)
 }
 .boton.amarillo {
@@ -118,7 +126,16 @@ nav ul.inline li {
     background-image: linear-gradient(#006225, #004C1D);
 }
 .boton:hover {
-    text-decoration: none;
+    text-decoration: underline;
+}
+.boton:active {
+    background-image: linear-gradient(#13A9E0, #14B4F0);
+}
+.boton.amarillo:active {
+    background-image: linear-gradient(#F2C604, #FFD004);
+}
+.boton.verde:active {
+    background-image: linear-gradient(#004C1D, #006225);
 }
 .fix {
     clear: both
@@ -210,4 +227,18 @@ nav ul.inline li {
    .horario .hora {
        font-size: 14px !important
    }
+}
+@media only screen and (min-width: 290px) {
+    p.small {
+        display: inline-block;
+    }
+}
+@media only screen and (min-width: 420px) {
+    .menu .usuario {
+        display: block;
+        float: right;
+    }
+    .menu .usuario a {
+        font-weight: 300;
+    }
 }
