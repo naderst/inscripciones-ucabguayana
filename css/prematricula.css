@@ -183,7 +183,7 @@ nav ul.inline li {
 .horario th {
     text-align: center;
     font-weight: bold;
-    font-size: 12px !important;
+    font-size: 10px !important;
 }
 .horario td {
     text-align: center;
@@ -198,9 +198,8 @@ nav ul.inline li {
     font-size: 9px !important
 }
 .horario .hora {
-    font-size: 10px !important;
+    font-size: 9px !important;
     font-weight: bold;
-    content: ';a';
 }
 .horario .m1 {
     background-color: #3498db
