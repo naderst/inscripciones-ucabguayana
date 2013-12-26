@@ -1,0 +1,156 @@
+@charset "utf-8";
+
+/*  Sistema de prematrícula - UCAB Guayana
+    Tema: Prematícula
+    Tema URL: http://github.com/naderst/inscripciones-ucabguayana
+    Autores: https://github.com/naderst/inscripciones-ucabguayana/graphs/contributors
+    Version: 1.0
+*/
+
+/* Estilos generales */
+
+* {
+    margin: 0;
+    padding: 0
+}
+body {
+    font-family: 'Open Sans', sans-serif
+}
+i {
+    margin: 0 4px;
+}
+p {
+    margin-top: 15px;
+}
+p.small {
+    background-color: #F3F3F3;
+    display: block;
+    padding: 5px;
+    font-size: 0.85em;
+}
+nav ul {
+    list-style: none
+}
+nav ul.inline li {
+    display: inline-block;
+    padding: 0 4px
+}
+#header {
+    background-color: #F0F0F0;
+    background-image: linear-gradient(#F6F6F6, #F0F0F0);
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #DDD;
+    height: 45px
+}
+#header .contenedor {
+    padding-top: 11px
+}
+#footer {
+    background-color: #F4F4F4;
+    border-top: 1px solid #EAEAEA;
+    text-align: right;
+    font-weight: 300;
+    min-height: 100%;
+    height: 100%;
+    padding: 10px 6px;
+}
+#maia-signature {
+    clear: both;
+    margin: 120px auto 0;
+    max-width: 980px;
+    min-height: 5px;
+}
+#maia-signature:before,
+[dir=rtl] #maia-signature:after {
+    border-left: 35px solid #006225;
+}
+#maia-signature:after,
+[dir=rtl] #maia-signature:before {
+    border-left: 34px solid #FFD100;
+    border-right: 35px solid #12B6EB;
+}
+#maia-signature:after,
+#maia-signature:before {
+    content: "";
+    float: right;
+    height: 5px;
+}
+.separador {
+    background: #FFF;
+    border-bottom: 1px solid #F0F0F0;
+    margin-top: 10px;
+    padding: 12px 6px
+}
+.contenido {
+    padding: 15px 6px
+}
+.contenedor {
+    margin: 0 auto;
+    max-width: 980px
+}
+.menu a {
+    color: #333;
+    font-size: 1em;
+    font-weight: 700;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #FFF
+}
+.menu a:hover {
+    color: #14B4F0;
+}
+.menu .usuario {
+    display: none;
+}
+.titulo {
+    font-weight: 300;
+    word-wrap: break-word;
+}
+.boton {
+    background-image: linear-gradient(#14B4F0, #13A9E0);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px 1px #DDD;
+    color: #FFF;
+    display: inline-block;
+    float: right;
+    margin-top: 15px;
+    padding: 8px 6px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7)
+}
+.boton.amarillo {
+    background-image: linear-gradient(#FFD004, #F2C604);
+}
+.boton.verde {
+    background-image: linear-gradient(#006225, #004C1D);
+}
+.boton:hover {
+    text-decoration: underline;
+}
+.boton:active {
+    background-image: linear-gradient(#13A9E0, #14B4F0);
+}
+.boton.amarillo:active {
+    background-image: linear-gradient(#F2C604, #FFD004);
+}
+.boton.verde:active {
+    background-image: linear-gradient(#004C1D, #006225);
+}
+.fix {
+    clear: both
+}
+@media only screen and (min-width: 290px) {
+    p.small {
+        display: inline-block;
+    }
+}
+@media only screen and (min-width: 420px) {
+    .menu .usuario {
+        display: block;
+        float: right;
+    }
+    .menu .usuario a {
+        font-weight: 300;
+    }
+}
