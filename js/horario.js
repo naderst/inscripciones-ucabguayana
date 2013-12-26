@@ -45,8 +45,15 @@ $(document).ready(function () {
                 for (var j = 0; j < horario[i].length; ++j) {
                     if (horario[i][j] == undefined)
                         html += '<td>&nbsp;</td>';
-                    else if (horario[i][j][1] != -1)
-                        html += '<td class="materia ' + colores[horario[i][j][0] % 4] + '" rowspan="' + horario[i][j][1] + '">' + materias[horario[i][j][0]].materia + '<br>(' + materias[horario[i][j][0]].salon + ')</td>';
+                    else if (horario[i][j][1] != -1) {
+                        var mdias = materias[horario[i][j][0]].dias;
+                        for(var dia in mdias) {
+                            if(mdias[dia].dia == dias[j] && mdias[dia].hora_inicio == horas[i])
+                                break;
+                        }
+
+                        html += '<td class="materia ' + colores[horario[i][j][0] % 4] + '" rowspan="' + horario[i][j][1] + '">' + materias[horario[i][j][0]].materia + '<br>(' + materias[horario[i][j][0]].dias[dia].salon + ')</td>';
+                    }
                 }
 
                 html += '</tr>';
