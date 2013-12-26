@@ -5,16 +5,22 @@
     Version: 1.0
         Requiere jQuery 1.9.1
 */
-$(document).ready(function () {
-    "use strict";
-    $('#prematricula li a').click(function () {
-        if ($(this).children('i').hasClass('fa-circle-o')) {
-            $(this).children('i').removeClass('fa-circle-o');
-            $(this).children('i').addClass('fa-check-circle-o');
-        } else {
-            $(this).children('i').removeClass('fa-check-circle-o');
-            $(this).children('i').addClass('fa-circle-o');
-        }
-    });
+var materiasSeleccionadas = [];
 
+function materiaSeleccionada(materia) {
+    if (materia.children('i').hasClass('fa-circle-o')) {
+        materia.children('i').removeClass('fa-circle-o');
+        materia.children('i').addClass('fa-check-circle-o');
+        materiasSeleccionadas.push(materia.attr('data-codigo'));
+    } else {
+        materia.children('i').removeClass('fa-check-circle-o');
+        materia.children('i').addClass('fa-circle-o');
+        materiasSeleccionadas.splice(materiasSeleccionadas.indexOf(materia.attr('data-codigo')), 1);
+    }
+}
+
+$(document).ready(function () {
+    $('#prematricula li a').click(function () {
+        materiaSeleccionada($(this));
+    });
 });

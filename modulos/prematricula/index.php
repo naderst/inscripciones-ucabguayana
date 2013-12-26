@@ -7,31 +7,31 @@
     <div class="contenedor">
         <ul id="prematricula">
             <li>
-                <a href="javascript:void(0)">Materia 1
+                <a data-codigo="1" href="javascript:void(0)">Materia 1
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
             <li>
-                <a href="javascript:void(0)">Materia 2
+                <a data-codigo="2" href="javascript:void(0)">Materia 2
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
             <li>
-                <a href="javascript:void(0)">Materia 3
+                <a data-codigo="3" href="javascript:void(0)">Materia 3
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
             <li>
-                <a href="javascript:void(0)">Materia 4
+                <a data-codigo="4" href="javascript:void(0)">Materia 4
                     <i class="fa fa-circle-o"></i>
                 </a>
 
             </li>
             <li>
-                <a href="javascript:void(0)">Materia 5
+                <a data-codigo="5" href="javascript:void(0)">Materia 5
                     <i class="fa fa-circle-o"></i>
                 </a>
 
