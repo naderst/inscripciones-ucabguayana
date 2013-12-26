@@ -106,7 +106,7 @@ nav ul.inline li {
     word-wrap: break-word;
 }
 .boton {
-    background-image: linear-gradient(#14B4F0, #13A9E0);
+    background-image: linear-gradient(#14B4F0, #12a6dd);
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     box-shadow: 1px 1px 5px 1px #DDD;
@@ -129,7 +129,7 @@ nav ul.inline li {
     text-decoration: underline;
 }
 .boton:active {
-    background-image: linear-gradient(#13A9E0, #14B4F0);
+    background-image: linear-gradient(#12a6dd, #14B4F0);
 }
 .boton.amarillo:active {
     background-image: linear-gradient(#F2C604, #FFD004);
@@ -139,6 +139,20 @@ nav ul.inline li {
 }
 .fix {
     clear: both
+}
+@media only screen and (min-width: 290px) {
+    p.small {
+        display: inline-block;
+    }
+}
+@media only screen and (min-width: 420px) {
+    .menu .usuario {
+        display: block;
+        float: right;
+    }
+    .menu .usuario a {
+        font-weight: 300;
+    }
 }
 /* Prematrícula */
 
@@ -162,7 +176,7 @@ nav ul.inline li {
 }
 #prematricula li a:hover {
     color: #FFF;
-    background-image: linear-gradient(#14B4F0, #13A9E0);
+    background-image: linear-gradient(#14B4F0, #12a6dd);
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7)
 }
 #prematricula li i {
@@ -177,6 +191,44 @@ nav ul.inline li {
 #prematricula li:last-child a {
     border-radius: 0 0 6px 6px;
     border-bottom: 1px solid #DDD
+}
+#futuros-semestres {
+    width: 100%;
+}
+#futuros-semestres ul {
+    background-color: #003c17;
+    border-radius: 6px;
+    color: #FFF;
+    float: left;
+    margin: 1% 1%;
+    width: 98%;
+    list-style: none;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
+}
+#futuros-semestres ul li {
+    padding: 5px;
+}
+#futuros-semestres ul li:first-child {
+    background-image: linear-gradient(#006225, #004C1D);
+    border-bottom: 4px solid #006225;
+    border-radius: 6px 6px 0 0;
+    font-weight: 700;
+    text-align: center;
+}
+#futuros-semestres ul li:last-child {
+    background-color: #006225;
+    border-radius:0 0 6px 6px;
+    font-size:0.85em;
+}
+@media only screen and (min-width: 540px) {
+    #futuros-semestres ul {
+        width: 48%;
+    }
+}
+@media only screen and (min-width: 800px) {
+    #futuros-semestres ul {
+        width: 23%;
+    }
 }
 /* Horario */
 
@@ -218,27 +270,13 @@ nav ul.inline li {
     background-color: #c0392b
 }
 @media only screen and (min-width: 520px) {
-   .horario .materia {
-       font-size: 14px !important
-   }
-   .horario th {
-       font-size: 16px !important
-   }
-   .horario .hora {
-       font-size: 14px !important
-   }
-}
-@media only screen and (min-width: 290px) {
-    p.small {
-        display: inline-block;
+    .horario .materia {
+        font-size: 14px !important
     }
-}
-@media only screen and (min-width: 420px) {
-    .menu .usuario {
-        display: block;
-        float: right;
+    .horario th {
+        font-size: 16px !important
     }
-    .menu .usuario a {
-        font-weight: 300;
+    .horario .hora {
+        font-size: 14px !important
     }
 }
