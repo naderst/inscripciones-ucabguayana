@@ -37,6 +37,8 @@
 
             </li>
         </ul>
+        <a id="enviar-prematricula" class="boton" href="javascript:void(0)">Enviar</a>
+        <div class="fix"></div>
     </div>
 </article>
 <section class="separador">

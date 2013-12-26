@@ -19,8 +19,29 @@ function materiaSeleccionada(materia) {
     }
 }
 
+function enviarPrematricula() {
+    var respuesta = confirm('Confirme las materias seleccionadas. Esta acción no se puede deshacer.');
+
+    if (respuesta == true) {
+        $.ajax({
+            type: "POST",
+            data: {
+                materias: materiasSeleccionadas
+            },
+            url: "index.php",
+            success: function (msg) {
+                alert('Su prematrícula ha sido ingresada con éxito');
+            }
+        });
+    }
+}
+
 $(document).ready(function () {
     $('#prematricula li a').click(function () {
         materiaSeleccionada($(this));
+    });
+
+    $('#enviar-prematricula').click(function () {
+        enviarPrematricula();
     });
 });

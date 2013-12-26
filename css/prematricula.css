@@ -7,6 +7,8 @@
     Version: 1.0
 */
 
+/* Estilos generales */
+
 * {
     margin: 0;
     padding: 0
@@ -16,6 +18,13 @@ body {
 }
 i {
     margin: 0 4px;
+}
+nav ul {
+    list-style: none
+}
+nav ul.inline li {
+    display: inline-block;
+    padding: 0 4px
 }
 #header {
     background-color: #F0F0F0;
@@ -27,54 +36,14 @@ i {
 #header .contenedor {
     padding-top: 11px
 }
-#prematricula {
-    border-radius: 6px;
-    box-shadow: 1px 1px 5px 2px #EEE;
-    list-style: none;
-}
-#prematricula li a {
-    background-image: linear-gradient(#F8F8F8, #F0F0F0);
-    border-top: 1px solid #DDD;
-    border-left: 1px solid #DDD;
-    border-right: 1px solid #DDD;
-    color: #333;
-    display: block;
-    font-weight: 700;
-    padding: 8px 6px;
-    position: relative;
-    text-decoration: none;
-    text-shadow: 1px 1px 0 #FFF
-}
-#prematricula li a:hover {
-    color: #FFF;
-    background-image: linear-gradient(#14B4F0, #13A9E0);
-    /*
-    background-image: linear-gradient(#FFD004, #F2C604);
-    background-image: linear-gradient(#006225, #004C1D);
-*/
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7)
-}
-#prematricula li i {
-    font-size: 1.3em;
-    position: absolute;
-    top: 0.4em;
-    right: 0.3em;
-}
-#prematricula li:first-child a {
-    border-radius: 6px 6px 0 0
-}
-#prematricula li:last-child a {
-    border-radius: 0 0 6px 6px;
-    border-bottom: 1px solid #DDD
-}
 #footer {
     background-color: #F6F6F6;
     border-top: 1px solid #F0F0F0;
-    text-align:right;
-    font-weight:300;
-    min-height:100%;
-    height:100%;
-    padding:10px 0;
+    text-align: right;
+    font-weight: 300;
+    min-height: 100%;
+    height: 100%;
+    padding: 10px 6px;
 }
 #maia-signature {
     clear: both;
@@ -130,17 +99,71 @@ i {
     font-weight: 300;
     word-wrap: break-word;
 }
+.boton {
+    background-image: linear-gradient(#14B4F0, #13A9E0);
+    border:1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px 1px #DDD;
+    color: #FFF;
+    display: inline-block;
+    float: right;
+    margin-top: 15px;
+    padding: 8px 6px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7)
+}
+.boton.amarillo {
+    background-image: linear-gradient(#FFD004, #F2C604);
+}
+.boton.verde {
+    background-image: linear-gradient(#006225, #004C1D);
+}
+.boton:hover {
+    text-decoration: none;
+}
 .fix {
     clear: both
 }
-nav ul {
-    list-style: none
+/* Prematrícula */
+
+#prematricula {
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px 2px #EEE;
+    list-style: none;
 }
-nav ul.inline li {
-    display: inline-block;
-    padding: 0 4px
+#prematricula li a {
+    background-image: linear-gradient(#F8F8F8, #F0F0F0);
+    border-top: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    color: #333;
+    display: block;
+    font-weight: 700;
+    padding: 8px 6px;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #FFF
 }
-.horario th{
+#prematricula li a:hover {
+    color: #FFF;
+    background-image: linear-gradient(#14B4F0, #13A9E0);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7)
+}
+#prematricula li i {
+    font-size: 1.3em;
+    position: absolute;
+    top: 0.4em;
+    right: 0.3em;
+}
+#prematricula li:first-child a {
+    border-radius: 6px 6px 0 0
+}
+#prematricula li:last-child a {
+    border-radius: 0 0 6px 6px;
+    border-bottom: 1px solid #DDD
+}
+/* Horario */
+
+.horario th {
     text-align: center;
     font-weight: bold;
 }
@@ -157,7 +180,7 @@ nav ul.inline li {
     font-size: 11px !important
 }
 .horario .hora {
-    font-size:  12px !important;
+    font-size: 12px !important;
     font-weight: bold;
 }
 .horario .m1 {
