@@ -8,13 +8,13 @@
 		<div id="status"></div>
 		<table border="0" class="horario" width="100%" cellspacing="0" cellpadding="0">
 			<tr>
-				<th>Hora</th>
-				<th>Lunes</th>
-				<th>Martes</th>
-				<th>Miércoles</th>
-				<th>Jueves</th>
-				<th>Viernes</th>
-				<th>Sábado</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
 			</tr>
 		</table>
 	</div>

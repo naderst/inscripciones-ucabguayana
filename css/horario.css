@@ -1,0 +1,102 @@
+/* Horario */
+
+.horario th {
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px !important;
+}
+.horario td {
+    text-align: center;
+    font-size: 10px;
+    width: 150px;
+}
+.horario tr:nth-child(even) td {
+    border-bottom: 1px dashed #95a5a6;
+    border-top: 1px dashed #95a5a6;
+}
+.horario .materia {
+    font-size: 10px !important
+}
+.horario .hora {
+    font-size: 9px !important;
+    font-weight: bold;
+}
+.horario .m1 {
+    background-color: #3498db
+}
+.horario .m2 {
+    background-color: #2ecc71
+}
+.horario .m3 {
+    background-color: #f1c40f
+}
+.horario .m4 {
+    background-color: #9b59b6
+}
+.horario .m5 {
+    background-color: #c0392b
+}
+.horario th:nth-child(1):after {
+    content: 'H'
+}
+.horario th:nth-child(2):after {
+    content: 'L'
+}
+.horario th:nth-child(3):after {
+    content: 'M'
+}
+.horario th:nth-child(4):after {
+    content: 'M'
+}
+.horario th:nth-child(5):after {
+    content: 'J'
+}
+.horario th:nth-child(6):after {
+    content: 'V'
+}
+.horario th:nth-child(7):after {
+    content: 'S'
+}
+@media only screen and (min-width: 360px) {
+   .horario .materia {
+       font-size: 12px !important
+   }
+   .horario th {
+       font-size: 12px !important
+   }
+   .horario .hora {
+       font-size: 12px !important
+   }
+}
+@media only screen and (min-width: 520px) {
+    .horario .materia {
+       font-size: 14px !important
+    }
+    .horario th {
+       font-size: 16px !important
+    }
+    .horario .hora {
+       font-size: 14px !important
+    }
+    .horario th:nth-child(1):after {
+        content: 'Hora'
+    }
+    .horario th:nth-child(2):after {
+        content: 'Lunes'
+    }
+    .horario th:nth-child(3):after {
+        content: 'Martes'
+    }
+    .horario th:nth-child(4):after {
+        content: 'Miércoles'
+    }
+    .horario th:nth-child(5):after {
+        content: 'Jueves'
+    }
+    .horario th:nth-child(6):after {
+        content: 'Viernes'
+    }
+    .horario th:nth-child(7):after {
+        content: 'Sábado'
+    }
+}

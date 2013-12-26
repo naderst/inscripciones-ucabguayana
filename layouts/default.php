@@ -8,8 +8,14 @@
     <meta name="description" content="Ingreso de prematrícula y consulta de horario." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-    <link href='<?php echo $app['basedir'].'/css/prematricula.css'; ?>' rel='stylesheet' type='text/css'>
+    <link href='<?php echo $app['basedir'].'/css/estilo.css'; ?>' rel='stylesheet' type='text/css'>
     <link href='<?php echo $app['basedir'].'/css/font-awesome.min.css'?>' rel='stylesheet' type='text/css'>
+    <?php
+        if($app['controller'] == 'prematricula')
+            echo "<link href='$app[basedir]/css/prematricula.css' rel='stylesheet' type='text/css'>";
+        if($app['controller'] == 'horario')
+            echo "<link href='$app[basedir]/css/horario.css' rel='stylesheet' type='text/css'>";
+    ?>
 </head>
 
 <body>
