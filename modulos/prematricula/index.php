@@ -51,6 +51,13 @@
 <article class="contenido">
     <div class="contenedor">
         <div id="futuros-semestres">
+            <div class="preload">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+<!--
             <ul>
                 <li>Período 1</li>
                 <li>Materia 1</li>
@@ -87,6 +94,7 @@
                 <li>
                     <i class="fa fa-bookmark-o"></i>Créditos restantes: X</li>
             </ul>
+-->
             <div class="fix"></div>
         </div>
     </div>

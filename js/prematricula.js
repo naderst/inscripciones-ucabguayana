@@ -7,6 +7,7 @@
 */
 var materiasSeleccionadas = [];
 var creditos = 0;
+var preloadHTML = '<div class="preload"><div></div><div></div><div></div><div></div></div>';
 
 function actualizarCreditos() {
     $('#creditos').html('<i class="fa fa-bookmark-o"></i>Créditos a cursar: ' + creditos);
@@ -27,8 +28,38 @@ function materiaSeleccionada(materia) {
     actualizarCreditos();
 }
 
+function cargarFuturosSemestres() {
+    $.ajax({
+        url: basedir + '/json/futuros-semestres.php',
+        beforeSend: function () {
+            $('#futuros-semestres .preload').show();
+        },
+        complete: function () {
+            $('#futuros-semestres .preload').hide();
+        },
+        error: function () {
+            alert('Ocurrió un error mientras se visualizaba el futuro.');
+        },
+        success: function (json) {
+            inflarFuturosSemestres(JSON.parse(json));
+        }
+    });
+}
+
+function inflarFuturosSemestres(semestres) {
+    var html = '';
+    for (i = 0; i < semestres.length; ++i) {
+        html += '<ul><li>' + semestres[i].lapso + '</li>';
+        for (j = 0; j < semestres[i].materias.length; ++j) {
+            html += '<li>' + semestres[i].materias[j] + '</li>';
+        }
+        html += ' <li>Créditos restantes: ' + semestres[i].creditos_restantes + ' </li></ul > ';
+    }
+    $('#futuros-semestres').html(preloadHTML + html + '<div class="fix"></div>');
+}
+
 function enviarPrematricula() {
-    var respuesta = confirm('Confirme las materias seleccionadas. Esta acción no se puede deshacer.');
+    var respuesta = confirm('Confirme las materias seleccionadas.Esta acció n no se puede deshacer.');
 
     if (respuesta == true) {
         $.ajax({
@@ -38,18 +69,19 @@ function enviarPrematricula() {
             },
             url: "index.php",
             success: function (msg) {
-                alert('Su prematrícula ha sido ingresada con éxito');
+                alert('Su prematrícula ha sido ingresada con éxito ');
             }
         });
     }
 }
 
 $(document).ready(function () {
-    $('#prematricula li a').click(function () {
+    $('#prematricula li a ').click(function () {
         materiaSeleccionada($(this));
+        cargarFuturosSemestres();
     });
 
-    $('#enviar-prematricula').click(function () {
+    $('#enviar-prematricula ').click(function () {
         enviarPrematricula();
     });
 });
