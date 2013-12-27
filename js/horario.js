@@ -1,17 +1,11 @@
 $(document).ready(function () {
     $('.horario').hide();
     $('#status').hide();
-    $('#status').html('Cargando...');
     $.ajax({
+        async: false,
         url: basedir + '/json/horario.php',
-        beforeSend: function () {
-            $('#status').show();
-        },
-        complete: function () {
-            $('#status').hide();
-        },
         error: function () {
-            alert('Ocurrió un error cargando el horario.');
+            $('#status').html('No se pudo mostrar el horario.').show();
         },
         success: function (json) {
             var colores = ['m1', 'm2', 'm3', 'm4', 'm5'];
