@@ -57,44 +57,6 @@
                 <div></div>
                 <div></div>
             </div>
-<!--
-            <ul>
-                <li>Período 1</li>
-                <li>Materia 1</li>
-                <li>Materia 2</li>
-                <li>Materia 3</li>
-                <li>Materia 4</li>
-                <li>
-                    <i class="fa fa-bookmark-o"></i>Créditos restantes: X</li>
-            </ul>
-            <ul>
-                <li>Período 2</li>
-                <li>Materia 1</li>
-                <li>Materia 2</li>
-                <li>Materia 3</li>
-                <li>Materia 4</li>
-                <li>
-                    <i class="fa fa-bookmark-o"></i>Créditos restantes: X</li>
-            </ul>
-            <ul>
-                <li>Período 3</li>
-                <li>Materia 1</li>
-                <li>Materia 2</li>
-                <li>Materia 3</li>
-                <li>Materia 4</li>
-                <li>
-                    <i class="fa fa-bookmark-o"></i>Créditos restantes: X</li>
-            </ul>
-            <ul>
-                <li>Período 4</li>
-                <li>Materia 1</li>
-                <li>Materia 2</li>
-                <li>Materia 3</li>
-                <li>Materia 4</li>
-                <li>
-                    <i class="fa fa-bookmark-o"></i>Créditos restantes: X</li>
-            </ul>
--->
             <div class="fix"></div>
         </div>
     </div>

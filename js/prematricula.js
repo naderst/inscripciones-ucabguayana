@@ -30,7 +30,7 @@ function materiaSeleccionada(materia) {
 
 function cargarFuturosSemestres() {
     $.ajax({
-        url: basedir + '/json/futuros-semestres.php',
+        url: basedir + '/json/futuros_semestres.php',
         beforeSend: function () {
             $('#futuros-semestres .preload').show();
         },
@@ -59,15 +59,13 @@ function inflarFuturosSemestres(semestres) {
 }
 
 function enviarPrematricula() {
-    var respuesta = confirm('Confirme las materias seleccionadas.Esta acció n no se puede deshacer.');
+    var respuesta = confirm('Confirme las materias seleccionadas. Esta acción no se puede deshacer.');
 
     if (respuesta == true) {
         $.ajax({
             type: "POST",
-            data: {
-                materias: materiasSeleccionadas
-            },
-            url: "index.php",
+            data: materiasSeleccionadas,
+            url: basedir + '/json/inscribir_prematricula.php',
             success: function (msg) {
                 alert('Su prematrícula ha sido ingresada con éxito ');
             }
@@ -76,12 +74,12 @@ function enviarPrematricula() {
 }
 
 $(document).ready(function () {
-    $('#prematricula li a ').click(function () {
+    $('#prematricula li a').click(function () {
         materiaSeleccionada($(this));
         cargarFuturosSemestres();
     });
 
-    $('#enviar-prematricula ').click(function () {
+    $('#enviar-prematricula').click(function () {
         enviarPrematricula();
     });
 });

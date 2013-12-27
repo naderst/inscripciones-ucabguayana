@@ -76,9 +76,22 @@
         width: 48%;
         margin: 1% 1%;
     }
+    #futuros-semestres ul:nth-of-type(1):nth-last-of-type(1) {
+        width: 98%;
+    }
 }
 @media only screen and (min-width: 800px) {
-    #futuros-semestres ul {
+    #futuros-semestres ul:nth-of-type(1):nth-last-of-type(1),
+    #futuros-semestres ul:nth-of-type(1):nth-last-of-type(2),
+    #futuros-semestres ul:nth-of-type(1):nth-last-of-type(2) ~ ul {
+        width: 48%;
+    }
+    #futuros-semestres ul:nth-of-type(1):nth-last-of-type(3),
+    #futuros-semestres ul:nth-of-type(1):nth-last-of-type(3) ~ ul {
+        width: 31.3%;
+    }
+    #futuros-semestres ul:nth-of-type(1):nth-last-of-type(4),
+    #futuros-semestres ul:nth-of-type(1):nth-last-of-type(4) ~ ul {
         width: 23%;
     }
 }
