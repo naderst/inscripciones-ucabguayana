@@ -27,19 +27,27 @@ function cargarPrematriculaBase() {
 
 function inflarPrematricula(prematricula) {
     var html = '';
+    var htmlDesplazadas = '';
     var htmlEspeciales = '';
 
     for (i = 0; i < prematricula.materias.length; ++i) {
-        if (prematricula.materias[i].flag != -1) {
+        switch (parseInt(prematricula.materias[i].flag)) {
+        case 0:
             html += '<li><a data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' + prematricula.materias[i].creditos +
                 '" href="javascript:void(0)">' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
-        } else {
+            break;
+        case -1:
             htmlEspeciales += '<p class="info"><i class="fa fa-info"></i>Ya puedes inscribir ' + prematricula.materias[i].nombre +
-                ', por favor dirígete a la escuela y pregunta por el profesor encargado de la materia.</p>'
+                ', por favor dirígete a la escuela y pregunta por el profesor encargado de la materia.</p>';
+            break;
+        default:
+            htmlDesplazadas += '<li><a class="disabled" data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' +
+                prematricula.materias[i].creditos + '" href="javascript:void(0)">' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
+            break;
         }
     }
 
-    $('#prematricula').html(html);
+    $('#prematricula').html(html + htmlDesplazadas);
     $('#materias-especiales').html(htmlEspeciales);
     $('#lapso').html(prematricula.lapso);
     creditosMaximos = parseInt(prematricula.creditos);
@@ -48,7 +56,8 @@ function inflarPrematricula(prematricula) {
 
 function cargarFuturosSemestres() {
     $.ajax({
-        url: basedir + '/json/futuros_semestres.php',
+        url: basedir + '/json/ruta_futura.php',
+        data: materiasSeleccionadas,
         beforeSend: function () {
             $('#futuros-semestres .preload').show();
         },
@@ -77,17 +86,48 @@ function inflarFuturosSemestres(semestres) {
 }
 
 function actualizarCreditos() {
-    $('#creditos').html('<i class="fa fa-bookmark-o"></i>Créditos a cursar: ' + creditosSeleccionados);
-
-
+    /* Se habilitan las materias de semestres superiores que se pueden inscribir.
+     ** Se deshabilitan las materias de semestres superiores que no se pueden inscribir porque hay materias de semestres inferiores pendientes.
+     */
     for (i = 0; i < prematriculaBase.length; ++i) {
-        if ($.inArray(prematriculaBase[i].codigo, materiasSeleccionadas) == -1 &&
-            (creditosSeleccionados + parseInt(prematriculaBase[i].creditos) > creditosMaximos)) {
+        var desplazamiento = 0;
+        var habilitar = true;
+
+        if (parseInt(prematriculaBase[i].flag) > 0) {
+            desplazamiento = parseInt(prematriculaBase[i].flag);
+
+            for (j = 0; j < prematriculaBase.length; ++j) {
+                if (parseInt(prematriculaBase[j].flag) > -1 && parseInt(prematriculaBase[j].flag) < desplazamiento &&
+                    $.inArray(prematriculaBase[j].codigo, materiasSeleccionadas) == -1) {
+                    habilitar = false;
+                }
+            }
+            if (habilitar) {
+                $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').removeClass('disabled');
+            } else {
+                $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').addClass('disabled');
+                $('a[data-codigo="' + prematriculaBase[i].codigo + '"] i').removeClass('fa-check-circle-o');
+                $('a[data-codigo="' + prematriculaBase[i].codigo + '"] i').addClass('fa-circle-o');
+                if (materiasSeleccionadas.indexOf(prematriculaBase[i].codigo) != -1) {
+                    materiasSeleccionadas.splice(materiasSeleccionadas.indexOf(prematriculaBase[i].codigo), 1);
+                    creditosSeleccionados -= parseInt(prematriculaBase[i].creditos);
+                }
+            }
+        }
+    }
+
+    /* Se desabilitan las materias que no se pueden inscribir por límite de créditos.
+     ** Se habilitan las materias que ahora se pueden inscribir porque el usuario eliminó la selección de una o varias materias.
+     */
+    for (i = 0; i < prematriculaBase.length; ++i) {
+        if ($.inArray(prematriculaBase[i].codigo, materiasSeleccionadas) == -1 && (creditosSeleccionados + parseInt(prematriculaBase[i].creditos) > creditosMaximos)) {
             $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').addClass('disabled');
-        } else {
+        } else if (parseInt(prematriculaBase[i]) == 0) {
             $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').removeClass('disabled');
         }
     }
+
+    $('#creditos').html('<i class="fa fa-bookmark-o"></i>Créditos a cursar: ' + creditosSeleccionados);
 }
 
 function materiaSeleccionada(materia) {
@@ -99,7 +139,9 @@ function materiaSeleccionada(materia) {
     } else {
         materia.children('i').removeClass('fa-check-circle-o');
         materia.children('i').addClass('fa-circle-o');
-        materiasSeleccionadas.splice(materiasSeleccionadas.indexOf(materia.attr('data-codigo')), 1);
+        if (materiasSeleccionadas.indexOf(materia.attr('data-codigo')) != -1) {
+            materiasSeleccionadas.splice(materiasSeleccionadas.indexOf(materia.attr('data-codigo')), 1);
+        }
         creditosSeleccionados -= parseInt(materia.attr('data-creditos'));
     }
     actualizarCreditos();

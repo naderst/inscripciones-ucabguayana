@@ -28,12 +28,6 @@ $prematricula = array(
             'flag' => '0'
         ),
         array(
-            'codigo' => '5',
-            'nombre' => 'Materia 5',
-            'creditos' => '5',
-            'flag' => '0'
-        ),
-        array(
             'codigo' => '6',
             'nombre' => 'Servicio comunitario',
             'creditos' => '3',
@@ -44,6 +38,24 @@ $prematricula = array(
             'nombre' => 'Pasantía',
             'creditos' => '3',
             'flag' => '-1'
+        ),
+        array(
+            'codigo' => '8',
+            'nombre' => 'Materia 8',
+            'creditos' => '1',
+            'flag' => '2'
+        ),
+        array(
+            'codigo' => '9',
+            'nombre' => 'Materia 9',
+            'creditos' => '1',
+            'flag' => '1'
+        ),
+        array(
+            'codigo' => '10',
+            'nombre' => 'Materia 10',
+            'creditos' => '1',
+            'flag' => '1'
         )
     )
 );
