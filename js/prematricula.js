@@ -57,7 +57,10 @@ function inflarPrematricula(prematricula) {
 function cargarFuturosSemestres() {
     $.ajax({
         url: basedir + '/json/ruta_futura.php',
-        data: materiasSeleccionadas,
+        type: 'POST',
+        data: {
+            'materias': materiasSeleccionadas
+        },
         beforeSend: function () {
             $('#futuros-semestres .preload').show();
         },
@@ -152,9 +155,11 @@ function enviarPrematricula() {
 
     if (respuesta == true) {
         $.ajax({
-            type: "POST",
-            data: materiasSeleccionadas,
             url: basedir + '/json/inscribir_prematricula.php',
+            type: "POST",
+            data: {
+                'materias': materiasSeleccionadas
+            },
             success: function (msg) {
                 alert('Su prematrícula ha sido ingresada con éxito ');
             }
@@ -167,7 +172,11 @@ $(document).ready(function () {
 
     $(document).on('click', '#prematricula li a:not(.disabled)', function () {
         materiaSeleccionada($(this));
-        cargarFuturosSemestres();
+        if (materiasSeleccionadas.length > 0) {
+            cargarFuturosSemestres();
+        } else {
+            $('#futuros-semestres').html(preloadHTML + '<div class="fix"></div>');
+        }
     });
 
     $('#enviar-prematricula').click(function () {
