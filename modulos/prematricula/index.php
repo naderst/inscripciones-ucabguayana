@@ -9,6 +9,7 @@
     <div class="contenedor">
         <ul id="prematricula">
         </ul>
+        <section id="materias-especiales"></section>
         <p id="creditos" class="small">
             <i class="fa fa-bookmark-o"></i>Créditos a cursar: 0</p>
         <a id="enviar-prematricula" class="boton" href="javascript:void(0)">Enviar</a>

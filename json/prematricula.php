@@ -32,6 +32,18 @@ $prematricula = array(
             'nombre' => 'Materia 5',
             'creditos' => '5',
             'flag' => '0'
+        ),
+        array(
+            'codigo' => '6',
+            'nombre' => 'Servicio comunitario',
+            'creditos' => '3',
+            'flag' => '-1'
+        ),
+        array(
+            'codigo' => '7',
+            'nombre' => 'Pasantía',
+            'creditos' => '3',
+            'flag' => '-1'
         )
     )
 );

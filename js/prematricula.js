@@ -27,13 +27,20 @@ function cargarPrematriculaBase() {
 
 function inflarPrematricula(prematricula) {
     var html = '';
+    var htmlEspeciales = '';
 
     for (i = 0; i < prematricula.materias.length; ++i) {
-        html += '<li><a data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' + prematricula.materias[i].creditos +
-            '" href="javascript:void(0)">' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
+        if (prematricula.materias[i].flag != -1) {
+            html += '<li><a data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' + prematricula.materias[i].creditos +
+                '" href="javascript:void(0)">' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
+        } else {
+            htmlEspeciales += '<p class="info"><i class="fa fa-info"></i>Ya puedes inscribir ' + prematricula.materias[i].nombre +
+                ', por favor dirígete a la escuela y pregunta por el profesor encargado de la materia.</p>'
+        }
     }
 
     $('#prematricula').html(html);
+    $('#materias-especiales').html(htmlEspeciales);
     $('#lapso').html(prematricula.lapso);
     creditosMaximos = parseInt(prematricula.creditos);
     prematriculaBase = prematricula.materias;
