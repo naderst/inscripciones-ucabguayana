@@ -25,6 +25,13 @@
     text-decoration: none;
     text-shadow: 1px 1px 0 #FFF
 }
+#prematricula li a.disabled,
+#prematricula li a.disabled:hover {
+    background-image: none;
+    background-color: #E5E5E5;
+    color: #BBB;
+    text-shadow: 1px 1px 0 #EEE
+}
 #prematricula li a:hover {
     color: #FFF;
     background-image: linear-gradient(#14B4F0, #12a6dd);

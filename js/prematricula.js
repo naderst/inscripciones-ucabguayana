@@ -6,26 +6,37 @@
         Requiere jQuery 1.9.1
 */
 var materiasSeleccionadas = [];
-var creditos = 0;
+var prematriculaBase;
+var creditosSeleccionados = 0;
+var creditosMaximos = 0;
 var preloadHTML = '<div class="preload"><div></div><div></div><div></div><div></div></div>';
 
-function actualizarCreditos() {
-    $('#creditos').html('<i class="fa fa-bookmark-o"></i>Créditos a cursar: ' + creditos);
+function cargarPrematriculaBase() {
+    $.ajax({
+        url: basedir + '/json/prematricula.php',
+        beforeSend: function () {},
+        complete: function () {},
+        error: function () {
+            alert('No se pudo cargar la prematrícula base.');
+        },
+        success: function (json) {
+            inflarPrematricula(JSON.parse(json));
+        }
+    });
 }
 
-function materiaSeleccionada(materia) {
-    if (materia.children('i').hasClass('fa-circle-o')) {
-        materia.children('i').removeClass('fa-circle-o');
-        materia.children('i').addClass('fa-check-circle-o');
-        materiasSeleccionadas.push(materia.attr('data-codigo'));
-        creditos += parseInt(materia.attr('data-creditos'));
-    } else {
-        materia.children('i').removeClass('fa-check-circle-o');
-        materia.children('i').addClass('fa-circle-o');
-        materiasSeleccionadas.splice(materiasSeleccionadas.indexOf(materia.attr('data-codigo')), 1);
-        creditos -= parseInt(materia.attr('data-creditos'));
+function inflarPrematricula(prematricula) {
+    var html = '';
+
+    for (i = 0; i < prematricula.materias.length; ++i) {
+        html += '<li><a data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' + prematricula.materias[i].creditos +
+            '" href="javascript:void(0)">' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
     }
-    actualizarCreditos();
+
+    $('#prematricula').html(html);
+    $('#lapso').html(prematricula.lapso);
+    creditosMaximos = parseInt(prematricula.creditos);
+    prematriculaBase = prematricula.materias;
 }
 
 function cargarFuturosSemestres() {
@@ -58,6 +69,35 @@ function inflarFuturosSemestres(semestres) {
     $('#futuros-semestres').html(preloadHTML + html + '<div class="fix"></div>');
 }
 
+function actualizarCreditos() {
+    $('#creditos').html('<i class="fa fa-bookmark-o"></i>Créditos a cursar: ' + creditosSeleccionados);
+
+
+    for (i = 0; i < prematriculaBase.length; ++i) {
+        if ($.inArray(prematriculaBase[i].codigo, materiasSeleccionadas) == -1 &&
+            (creditosSeleccionados + parseInt(prematriculaBase[i].creditos) > creditosMaximos)) {
+            $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').addClass('disabled');
+        } else {
+            $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').removeClass('disabled');
+        }
+    }
+}
+
+function materiaSeleccionada(materia) {
+    if (materia.children('i').hasClass('fa-circle-o')) {
+        materia.children('i').removeClass('fa-circle-o');
+        materia.children('i').addClass('fa-check-circle-o');
+        materiasSeleccionadas.push(materia.attr('data-codigo'));
+        creditosSeleccionados += parseInt(materia.attr('data-creditos'));
+    } else {
+        materia.children('i').removeClass('fa-check-circle-o');
+        materia.children('i').addClass('fa-circle-o');
+        materiasSeleccionadas.splice(materiasSeleccionadas.indexOf(materia.attr('data-codigo')), 1);
+        creditosSeleccionados -= parseInt(materia.attr('data-creditos'));
+    }
+    actualizarCreditos();
+}
+
 function enviarPrematricula() {
     var respuesta = confirm('Confirme las materias seleccionadas. Esta acción no se puede deshacer.');
 
@@ -74,7 +114,9 @@ function enviarPrematricula() {
 }
 
 $(document).ready(function () {
-    $('#prematricula li a').click(function () {
+    cargarPrematriculaBase();
+
+    $(document).on('click', '#prematricula li a:not(.disabled)', function () {
         materiaSeleccionada($(this));
         cargarFuturosSemestres();
     });
