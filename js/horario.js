@@ -23,7 +23,7 @@ $(document).ready(function () {
                     var ik = horas.indexOf(materias[i].dias[j].hora_inicio);
                     var jk = dias.indexOf(materias[i].dias[j].dia);
                     var rowspan = horas.indexOf(materias[i].dias[j].hora_fin) - horas.indexOf(materias[i].dias[j].hora_inicio) + 1;
-
+                    rowspan--;
                     horario[ik][jk] = [parseInt(i), rowspan];
 
                     for (var k = ik + 1; k <= ik + rowspan - 1; ++k)
@@ -34,7 +34,7 @@ $(document).ready(function () {
 
             for (var i = 0; i < horario.length - 1; ++i) {
                 html += '<tr>';
-                html += '<td class="hora">' + horas[i].substr(0,5) + '</td>';
+                html += '<td class="hora">' + horas[i].substr(0,5) + ' - ' + horas[i+1].substr(0,5) + '</td>';
 
                 for (var j = 0; j < horario[i].length; ++j) {
                     if (horario[i][j] == undefined)
