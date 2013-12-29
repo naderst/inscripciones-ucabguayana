@@ -21,7 +21,7 @@ if(!isset($_SESSION["usuario"])){
 	$_SESSION["usuario"] = 22588454;
 }
 
-$conexion = pg_connect("host=localhost port=5432 dbname=inscripciones user=postgres password=chao") OR die("No Se Pudo Realizar Conexion");
+$conexion = pg_connect("host=localhost port=5432 dbname=inscripciones user=postgres password=") OR die("No Se Pudo Realizar Conexion");
 
 $horario = array();
 $i = $j = -1;
