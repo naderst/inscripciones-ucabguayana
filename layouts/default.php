@@ -16,6 +16,8 @@
             echo "<link href='$app[basedir]/css/preload.css' rel='stylesheet' type='text/css'>";
         if($app['controller'] == 'horario')
             echo "<link href='$app[basedir]/css/horario.css' rel='stylesheet' type='text/css'>";
+        if($app['controller'] == 'prematricula-fija')
+            echo "<link href='$app[basedir]/css/prematricula_fija.css' rel='stylesheet' type='text/css'>";
     ?>
 </head>
 
@@ -60,6 +62,8 @@
 			echo '<script async defer src="'.$app['basedir'].'/js/horario.js"></script>';
 		if($app['controller'] == 'prematricula')
 			echo '<script async defer src="'.$app['basedir'].'/js/prematricula.js"></script>';
+        if($app['controller'] == 'prematricula-fija')
+			echo '<script async defer src="'.$app['basedir'].'/js/prematricula_fija.js"></script>';
 	?>
 </body>
 

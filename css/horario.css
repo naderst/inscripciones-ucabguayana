@@ -36,6 +36,21 @@
 .horario .m5 {
     background-color: #c0392b
 }
+.horario .m6 {
+    background-color: #ADD633
+}
+.horario .m7 {
+    background-color: #66A3FF
+}
+.horario .m8 {
+    background-color: #94FF70
+}
+.horario .m9 {
+    background-color: #FF4D4D
+}
+.horario .m10 {
+    background-color: #FF8533
+}
 .horario th:nth-child(1):after {
     content: 'H'
 }
