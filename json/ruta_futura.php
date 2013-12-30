@@ -57,6 +57,10 @@ for($i=0 ; $i<4 ; $i++){
 			) as prem on (materias.id_materia = prem.id_materia_prelada and materias.tipo_materia='ob') order by semestre";
     
     $materias = pg_query($prem); 
+   
+    if(pg_num_rows($materias)==0)
+        break;
+    
     $creditos_aprobados = pg_fetch_assoc(pg_query($ca));
     $futuro[$i]['creditos_restantes'] = (($aux=181-$creditos_aprobados['creditos'])<0)?0:$aux;
     $futuro[$i]['lapso'] = $periodo['lapso'] = (($periodo['lapso'] % 2)==0)?$periodo['lapso']+99:$periodo['lapso']+1;
