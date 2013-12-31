@@ -1,4 +1,5 @@
 <?php
+require_once('../config.php');
 
 function dias($d){
     switch ($d){
@@ -21,7 +22,7 @@ if(!isset($_SESSION["usuario"])){
 	$_SESSION["usuario"] = 22588454;
 }
 
-$conexion = pg_connect("host=localhost port=5432 dbname=inscripcion user=postgres password=") OR die("No Se Pudo Realizar Conexion");
+$conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
 
 $horario = array();
 $i = $j = -1;
