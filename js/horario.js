@@ -1,11 +1,11 @@
 $(document).ready(function () {
     $('.horario').hide();
-    $('#status').hide();
+    $('.horario-small table').hide();
     $.ajax({
         async: false,
         url: basedir + '/json/horario.php',
         error: function () {
-            $('#status').html('No se pudo mostrar el horario.').show();
+            $('.contenido .contenedor').html('No se pudo mostrar el horario.');
         },
         success: function (json) {
             var colores = ['m1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8', 'm9', 'm10'];
@@ -34,7 +34,7 @@ $(document).ready(function () {
 
             for (var i = 0; i < horario.length - 2; ++i) {
                 html += '<tr>';
-                html += '<td class="hora">' + horas[i].substr(0,5) + ' - ' + horas[i+1].substr(0,5) + '</td>';
+                html += '<td class="hora">' + horas[i].substr(0,5) + '-' + horas[i+1].substr(0,5) + '</td>';
 
                 for (var j = 0; j < horario[i].length; ++j) {
                     if (horario[i][j] == undefined)
@@ -55,6 +55,24 @@ $(document).ready(function () {
 
             $('.horario').append(html);
             $('.horario').show();
+
+            html = '';
+
+            for(j = 0; j < dias.length; ++j) {
+                html += '<tr><th>' + dias[j] + '</th></tr>';
+
+                for(i = 0; i < horario.length - 2; ++i) {
+                    if(horario[i][j] != undefined && horario[i][j][1] != -1) {
+                        for(var ik in materias[horario[i][j][0]].dias) 
+                            if(materias[horario[i][j][0]].dias[ik].dia == dias[j])
+                                break;
+                        html += '<tr><td class="' + colores[horario[i][j][0] % 10] + '"><b>' + materias[horario[i][j][0]].materia + '</b><br>' + horas[i]  + ' - ' + horas[i+horario[i][j][1]] + '<br>' + materias[horario[i][j][0]].dias[ik].salon + '</td></tr>';
+                    }
+                }
+            }
+
+            $('.horario-small table').append(html);
+            $('.horario-small table').show();
         }
     });
 });

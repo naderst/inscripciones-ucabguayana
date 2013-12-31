@@ -5,7 +5,6 @@
 </section>
 <article class="contenido">
     <div class="contenedor">
-		<div id="status"></div>
 		<table border="0" class="horario" width="100%" cellspacing="0" cellpadding="0">
 			<tr>
 				<th></th>
@@ -17,5 +16,9 @@
 				<th></th>
 			</tr>
 		</table>
+		<div class="horario-small">
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			</table>
+		</div>
 	</div>
 </article>
