@@ -2,8 +2,8 @@
 $app['basedir'] = '/inscripciones-ucabguayana';
 $app['db'] = array(
 	'host' => 'localhost',
-	'name' => 'inscripcion',
-	'user' => 'postgres',
+	'name' => 'BD',
+	'user' => 'user',
 	'pass' => '',
 	'port' => '5432'
 );
