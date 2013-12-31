@@ -1,80 +1,100 @@
 /* Horario */
-
-.horario th {
-    text-align: center;
-    font-weight: bold;
-    font-size: 10px !important;
+.horario {
+    display: none !important
 }
-.horario td {
-    text-align: center;
-    font-size: 10px;
-    width: 150px;
+.horario-small {
+    display: block !important
 }
-.horario tr td {
-    border-bottom: 1px dashed #95a5a6;
-}
-.horario tr th {
+.horario-small table tr th {
     border-bottom: 1px solid #95a5a6;
+    font-size: 18px;
 }
-.horario .materia {
-    font-size: 10px !important
+.horario-small table tr td {
+    text-align: center
 }
-.horario .hora {
-    font-size: 9px !important;
-    font-weight: bold;
-}
-.horario .m1 {
+.horario .m1, .horario-small .m1 {
     background-color: #3498db
 }
-.horario .m2 {
+.horario .m2, .horario-small .m2  {
     background-color: #2ecc71
 }
-.horario .m3 {
+.horario .m3, .horario-small .m3 {
     background-color: #f1c40f
 }
-.horario .m4 {
+.horario .m4, .horario-small .m4 {
     background-color: #9b59b6
 }
-.horario .m5 {
+.horario .m5, .horario-small .m5 {
     background-color: #c0392b
 }
-.horario .m6 {
+.horario .m6, .horario-small .m6 {
     background-color: #ADD633
 }
-.horario .m7 {
+.horario .m7, .horario-small .m7 {
     background-color: #66A3FF
 }
-.horario .m8 {
+.horario .m8, .horario-small .m8 {
     background-color: #94FF70
 }
-.horario .m9 {
+.horario .m9, .horario-small .m9 {
     background-color: #FF4D4D
 }
-.horario .m10 {
+.horario .m10, .horario-small .m10 {
     background-color: #FF8533
 }
-.horario th:nth-child(1):after {
-    content: 'H'
+@media only screen and (min-width: 480px) {
+    .horario-small {
+        display: none !important
+    }
+    .horario {
+        display: block !important
+    }
+    .horario th {
+        text-align: center;
+        font-weight: bold;
+        font-size: 10px !important;
+    }
+    .horario td {
+        text-align: center;
+        font-size: 10px;
+        width: 14%;
+    }
+    .horario tr td {
+        border-bottom: 1px dashed #95a5a6;
+    }
+    .horario tr th {
+        border-bottom: 1px solid #95a5a6;
+    }
+    .horario .materia {
+        font-size: 10px !important
+    }
+    .horario .hora {
+        font-size: 9px !important;
+        font-weight: bold;
+    }
+    .horario th:nth-child(1):after {
+        content: 'H'
+    }
+    .horario th:nth-child(2):after {
+        content: 'L'
+    }
+    .horario th:nth-child(3):after {
+        content: 'M'
+    }
+    .horario th:nth-child(4):after {
+        content: 'M'
+    }
+    .horario th:nth-child(5):after {
+        content: 'J'
+    }
+    .horario th:nth-child(6):after {
+        content: 'V'
+    }
+    .horario th:nth-child(7):after {
+        content: 'S'
+    }
 }
-.horario th:nth-child(2):after {
-    content: 'L'
-}
-.horario th:nth-child(3):after {
-    content: 'M'
-}
-.horario th:nth-child(4):after {
-    content: 'M'
-}
-.horario th:nth-child(5):after {
-    content: 'J'
-}
-.horario th:nth-child(6):after {
-    content: 'V'
-}
-.horario th:nth-child(7):after {
-    content: 'S'
-}
-@media only screen and (min-width: 360px) {
+@media only screen and (min-width: 645px) {
    .horario .materia {
        font-size: 12px !important
    }
@@ -85,7 +105,7 @@
        font-size: 12px !important
    }
 }
-@media only screen and (min-width: 520px) {
+@media only screen and (min-width: 800px) {
     .horario .materia {
        font-size: 14px !important
     }
