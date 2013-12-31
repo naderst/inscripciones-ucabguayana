@@ -46,7 +46,7 @@ $(document).ready(function () {
                                 break;
                         }
 
-                        html += '<td class="materia ' + colores[horario[i][j][0] % 4] + '" rowspan="' + horario[i][j][1] + '">' + materias[horario[i][j][0]].materia + '<br>(' + materias[horario[i][j][0]].dias[dia].salon + ')</td>';
+                        html += '<td class="materia ' + colores[horario[i][j][0] % 10] + '" rowspan="' + horario[i][j][1] + '">' + materias[horario[i][j][0]].materia + '<br>(' + materias[horario[i][j][0]].dias[dia].salon + ')</td>';
                     }
                 }
 
