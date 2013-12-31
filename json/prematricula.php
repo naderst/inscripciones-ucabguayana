@@ -8,7 +8,7 @@ if(!isset($_SESSION["usuario"])){
 	$_SESSION["usuario"] = 22588454;
 }
 
-$conexion = pg_connect("host=localhost port=5432 dbname=inscripciones-ucabguayana user=postgres password=brilight7") OR die("No Se Pudo Realizar Conexion");
+$conexion = pg_connect("host=localhost port=5432 dbname=inscripcion user=postgres password=") OR die("No Se Pudo Realizar Conexion");
 $prematricula = array();
 $prematricula['lapso'] = $prematricula['creditos'] = 0;
 $prematricula['materias'] = array();

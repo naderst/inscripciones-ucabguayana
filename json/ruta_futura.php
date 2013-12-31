@@ -7,12 +7,11 @@ if(!isset($_SESSION["usuario"])){
          */
 	$_SESSION["usuario"] = 22588454;
 }
-$conexion = pg_connect("host=localhost port=5432 dbname=inscripciones-ucabguayana user=postgres password=brilight7") OR die("No Se Pudo Realizar Conexion");
+$conexion = pg_connect("host=localhost port=5432 dbname=inscripcion user=postgres password=") OR die("No Se Pudo Realizar Conexion");
 
 $futuro = array();
 $periodo = $periodo_inicial = pg_fetch_assoc(pg_query("select max(lapso) as lapso from lapsos"));
-
-foreach ($_POST['materias'] as $codigo) 
+foreach ($_POST['materias'] as $codigo)
     pg_query("insert into materias_x_alumnos values($codigo,$_SESSION[usuario],$periodo[lapso],'20',401)");
 
 for($i=0 ; $i<4 ; $i++){
@@ -59,7 +58,7 @@ for($i=0 ; $i<4 ; $i++){
     
     $materias = pg_query($prem); 
     $creditos_aprobados = pg_fetch_assoc(pg_query($ca));
-    $futuro[$i]['creditos_restantes'] = (($aux=193-$creditos_aprobados['creditos'])<0)?0:$aux;
+    $futuro[$i]['creditos_restantes'] = (($aux=181-$creditos_aprobados['creditos'])<0)?0:$aux;
     $futuro[$i]['lapso'] = $periodo['lapso'] = (($periodo['lapso'] % 2)==0)?$periodo['lapso']+99:$periodo['lapso']+1;
     $futuro[$i]['materias'] = array();
     pg_query("insert into lapsos values($periodo[lapso])");
@@ -67,6 +66,7 @@ for($i=0 ; $i<4 ; $i++){
     while($tupla=pg_fetch_assoc($materias)){
         if($tupla['creditos_materia']<=$creditos_disponibles){
             $creditos_disponibles -= $tupla['creditos_materia'];
+            $futuro[$i]['creditos_restantes'] -= $tupla['creditos_materia'];
             $futuro[$i]['materias'][$j++] = $tupla['nombre_materia'];
             pg_query("insert into materias_x_alumnos values($tupla[id_materia],$_SESSION[usuario],$periodo[lapso],'20',401)");
         }else
