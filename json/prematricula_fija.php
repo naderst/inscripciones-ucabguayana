@@ -7,7 +7,7 @@ if(!isset($_SESSION["usuario"])){
          */
 	$_SESSION["usuario"] = 22588454;
 }
-$conexion = pg_connect("host=localhost port=5432 dbname=inscripcion user=postgres password=753951") OR die("No Se Pudo Realizar Conexion");
+$conexion = pg_connect("host=localhost port=5432 dbname=inscripciones-ucabguayana user=postgres password=brilight7") OR die("No Se Pudo Realizar Conexion");
 
 $ca = "(select sum(materias.creditos_materia) as creditos 
 		from materias inner join (select materias.id_materia 

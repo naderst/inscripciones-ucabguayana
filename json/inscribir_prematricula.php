@@ -7,7 +7,7 @@ if(!isset($_SESSION["usuario"])){
          */
 	$_SESSION["usuario"] = 22588454;
 }
-$conexion = pg_connect("host=localhost port=5432 dbname=inscripcion user=postgres password=shadowness") OR die("No Se Pudo Realizar Conexion");
+$conexion = pg_connect("host=localhost port=5432 dbname=inscripciones-ucabguayana user=postgres password=brilight7") OR die("No Se Pudo Realizar Conexion");
 
 $futuro = array();
 $periodo = $periodo_inicial = pg_fetch_assoc(pg_query("select max(lapso) as lapso from lapsos"));
