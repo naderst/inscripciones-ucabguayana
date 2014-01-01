@@ -14,5 +14,8 @@ if(isset($_GET['params'])) {
 			unset($app['params'][$k]);
 }
 
-require_once('layouts/default.php');
+if(!isset($_SESSION['usuario']) || $app['controller'] == 'autenticacion')
+	require_once('modulos/autenticacion/index.php');
+else
+	require_once('layouts/default.php');
 ?>
