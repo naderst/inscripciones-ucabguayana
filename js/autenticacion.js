@@ -51,4 +51,9 @@ $(document).ready(function () {
     $('#iniciar-sesion').click(function () {
         iniciarSesion();
     });
+
+    $(document).keypress(function (e) {
+        if (e.which == 13)
+            iniciarSesion();
+    });
 });
