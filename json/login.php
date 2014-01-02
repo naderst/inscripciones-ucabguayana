@@ -3,8 +3,8 @@ require_once('../config.php');
 $conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
 $mensaje = array();
 $login = pg_query("select id_alumno
-                    from cuentas_x_alumnos
-                    where usuario = '$_POST[usuario]' and
+                    from alumnos
+                    where id_alumno = $_POST[usuario] and
                           clave = md5('$_POST[clave]')");
 if(($tupla = pg_fetch_array($login))){
     session_start();
@@ -17,13 +17,14 @@ if(($tupla = pg_fetch_array($login))){
     $tupla = pg_fetch_assoc(pg_query("select count(*) as inscritas
                                        from materias_x_alumnos inner join (select max(lapso) as lapso
                                                                             from lapsos) as periodo
-                                            on materias_x_alumnos.lapso = periodo.lapso"));
-   $mensaje['msg'] = ($tupla['inscritas']==0)?"/prematricula/":"/horario/";
+                                            on materias_x_alumnos.lapso = periodo.lapso 
+                                            and materias_x_alumnos.id_alumno = $_SESSION[usuario]"));
+   $mensaje['msg'] = ($tupla['inscritas']==0)?"/prematricula/":"/prematricula-fija/";
 }
 else{
     $login = pg_query("select id_profesor
                         from cuentas_x_profesores
-                        where usuario = '$_POST[usuario]' and
+                        where id_profesor = $_POST[usuario] and
                               clave = md5('$_POST[clave]')");
     if(($tupla = pg_fetch_array($login))){
         session_start();
