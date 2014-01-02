@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+/*  Sistema de prematrícula - UCAB Guayana
+    Tema: Prematrícula fija ya seleccionada por el estudiante
+    Tema URL: http://github.com/naderst/inscripciones-ucabguayana
+    Autores: https://github.com/naderst/inscripciones-ucabguayana/graphs/contributors
+    Version: 1.0
+*/
+
+.administrativo .lista {
+    border: 2px solid #12B6EB;
+    border-radius: 5px;
+    margin-top: 2px;
+    outline: none;
+    font-size: 110%;
+}
+.administrativo .lista:hover {
+    border: 4px solid #12B6EB;
+}
+.administrativo .lista:focus {
+    border: 4px solid #12B6EB;
+}
+.administrativo td {
+    padding-right: 5%;
+}
+#buscar {
+    background-color:transparent;
+    border:transparent;
+    font-size:140%;
+    outline:none;
+    padding-top:10%;
+}
+#buscar:hover {
+    color:#12B6EB;
+    cursor:pointer;
+}
