@@ -27,10 +27,11 @@
                 <i class="fa fa-lock"></i>
                 <input type="password" value="contraseña">
             </div>
-            <a href="javascript:void(0)" class="boton">Iniciar sesión</a>
+            <a id="iniciar-sesion" href="javascript:void(0)" class="boton">Iniciar sesión</a>
             <div class="fix"></div>
         </form>
     </div>
+    <script>basedir = '<?php echo $app['basedir']; ?>';</script>
     <?php echo '<script src="'.$app['basedir']. '/js/jquery-1.10.2.min.js"></script>'; ?>
     <?php echo '<script async defer src="'.$app['basedir']. '/js/autenticacion.js"></script>'; ?>
 </body>
