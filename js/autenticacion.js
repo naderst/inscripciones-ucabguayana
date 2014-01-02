@@ -21,10 +21,15 @@ function iniciarSesion() {
         },
         success: function (json) {
             var respuesta = (JSON.parse(json));
-            if (respuesta.flag == '0')
+            if (respuesta.flag == '0') {
                 alert(respuesta.msg);
-            else
+            } else {
+                if (typeof (Storage) !== "undefined") {
+                    localStorage['nombre'] = respuesta.nombre;
+                }
                 window.location = basedir + respuesta.msg;
+
+            }
         }
     });
 }

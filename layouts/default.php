@@ -37,8 +37,8 @@
                             <i class="fa fa-clock-o"></i>Horario</a>
                     </li>
                     <li class="usuario">
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-user"></i>Nombre Apellido</a>
+                        <a title="Cerrar sesión" href="javascript:void(0)">
+                            <i class="fa fa-user"></i><span id="nombre-usuario"></span></a>
                     </li>
                     <li class="fix"></li>
                 </ul>
@@ -59,6 +59,13 @@
     </footer>
 	<?php echo '<script src="'.$app['basedir'].'/js/jquery-1.10.2.min.js"></script>'; ?>
 	<script>basedir = '<?php echo $app['basedir']; ?>';</script>
+	<script>
+        if (typeof (Storage) !== "undefined") {
+            $('#nombre-usuario').html(localStorage['nombre']);
+        } else {
+            $('.usuario').hide();
+        }
+	</script>
 	<?php
 		if($app['controller'] == 'horario')
 			echo '<script async defer src="'.$app['basedir'].'/js/horario.js"></script>';
