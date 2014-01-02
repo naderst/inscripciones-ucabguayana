@@ -1,5 +1,8 @@
 <?php
-$conexion = pg_connect("host=localhost port=5432 dbname=inscripcion user=postgres password=753951") OR die("No Se Pudo Realizar Conexion");
+require_once('../config.php');
+
+$conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
+
 $mensaje = array();
 $login = pg_query("select id_alumno
                     from cuentas_x_alumnos
