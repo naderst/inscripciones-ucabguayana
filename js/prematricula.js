@@ -162,7 +162,6 @@ function enviarPrematricula() {
             },
             success: function (msg) {
                 var respuesta = JSON.parse(msg);
-                alert('Su prematrícula ha sido ingresada con éxito ');
                 if (respuesta.flag == '1') {
                     window.location = basedir + respuesta.msg;
                 }
