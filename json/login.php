@@ -18,7 +18,7 @@ if(($tupla = pg_fetch_array($login))){
                                        from materias_x_alumnos inner join (select max(lapso) as lapso
                                                                             from lapsos) as periodo
                                             on materias_x_alumnos.lapso = periodo.lapso"));
-   $mensaje['msg'] = ($tupla['inscritas']==0)?"FRONTEND DE COLS":"FRONTEND DE NADER";
+   $mensaje['msg'] = ($tupla['inscritas']==0)?"/prematricula/":"/horario/";
 }
 else{
     $login = pg_query("select id_profesor
@@ -38,7 +38,7 @@ else{
     else{
         $mensaje['flag'] = 0;
         $mensaje['nombre'] = "";
-        $mensaje['msg'] = "USUARIO O CLAVE INVALIDA";
+        $mensaje['msg'] = "Usuario o clave inválida";
     }
 }
 echo json_encode($mensaje);

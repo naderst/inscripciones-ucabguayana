@@ -14,5 +14,15 @@ if(isset($_GET['params'])) {
 			unset($app['params'][$k]);
 }
 
-require_once('layouts/default.php');
+if($app['controller'] == 'logout') {
+	foreach($_SESSION as $k => $v)
+		unset($_SESSION[$k]);
+
+	header('Location: '.$app['basedir'].'/');
+}
+
+if(!isset($_SESSION['usuario']))
+	require_once('modulos/autenticacion/index.php');
+else
+	require_once('layouts/default.php');
 ?>

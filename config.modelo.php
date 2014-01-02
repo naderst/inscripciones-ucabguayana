@@ -2,9 +2,9 @@
 $app['basedir'] = '/inscripciones-ucabguayana';
 $app['db'] = array(
 	'host' => 'localhost',
-	'user' => 'postgres',
-	'pass' => 'brilight7',
-	'name' => 'inscripciones-ucabguayana',
+	'name' => 'BD',
+	'user' => 'user',
+	'pass' => '',
 	'port' => '5432'
 );
 ?>
