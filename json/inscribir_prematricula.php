@@ -23,7 +23,7 @@ $periodo = $periodo_inicial = pg_fetch_assoc(pg_query("select max(lapso) as laps
 foreach ($_POST['materias'] as $codigo)
     pg_query("insert into materias_x_alumnos values($codigo,$_SESSION[usuario],$periodo[lapso],null,401)");
 $mensaje['flag']=1;
-$mensaje['msg'] = "AQUI VA LA DIRECCION DE FRONTEND DE PREMATRICULA DE NADER";
+$mensaje['msg'] = "/prematricula-fija";
 
 echo json_encode($mensaje);
 ?>

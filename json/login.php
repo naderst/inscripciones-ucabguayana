@@ -34,7 +34,7 @@ else{
                                             where id_profesor = $tupla[id_profesor]"));
         $mensaje['flag'] = 1;
         $mensaje['nombre'] = $tupla['nombre_profesor']." ".$tupla['apellido_profesor'];
-        $mensaje['msg'] = "FRONTEND DE MOISES (DIRECTIVO)";
+        $mensaje['msg'] = "/administrativo";
     }
     else{
         $mensaje['flag'] = 0;
