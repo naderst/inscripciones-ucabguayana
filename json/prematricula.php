@@ -17,7 +17,7 @@ $validacion = pg_fetch_assoc(pg_query("select count(*) as inscritas
                                             and materias_x_alumnos.id_alumno = $_SESSION[usuario]"));
 
 if($validacion['inscritas']>0)
-    die ("ERROR ACCESO NO PERMITIDO");
+    die ("Error acceso no permitido");
 
 $prematricula = array();
 $prematricula['lapso'] = $prematricula['creditos'] = 0;
