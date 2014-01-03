@@ -17,13 +17,13 @@ $validacion = pg_fetch_assoc(pg_query("select count(*) as inscritas
                                             and materias_x_alumnos.id_alumno = $_SESSION[usuario]"));
 
 if($validacion['inscritas']>0)
-    die ("ERROR ACCESO NO PERMITIDO");
+    die ("Error acceso no permitido");
 
 $periodo = $periodo_inicial = pg_fetch_assoc(pg_query("select max(lapso) as lapso from lapsos"));
 foreach ($_POST['materias'] as $codigo)
     pg_query("insert into materias_x_alumnos values($codigo,$_SESSION[usuario],$periodo[lapso],null,401)");
 $mensaje['flag']=1;
-$mensaje['msg'] = "AQUI VA LA DIRECCION DE FRONTEND DE PREMATRICULA DE NADER";
+$mensaje['msg'] = "/horario/";
 
 echo json_encode($mensaje);
 ?>

@@ -16,7 +16,7 @@ $validacion = pg_fetch_assoc(pg_query("select count(*) as inscritas
                                             and materias_x_alumnos.id_alumno = $_SESSION[usuario]"));
 
 if($validacion['inscritas']>0)
-    die ("ERROR ACCESO NO PERMITIDO");
+    die ("Error acceso no permitido");
 
 $futuro = array();
 $periodo = $periodo_inicial = pg_fetch_assoc(pg_query("select max(lapso) as lapso from lapsos"));
