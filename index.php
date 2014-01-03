@@ -23,6 +23,18 @@ if($app['controller'] == 'logout') {
 
 if(!isset($_SESSION['usuario']))
 	require_once('modulos/autenticacion/index.php');
-else
+else {
+	$conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
+	$tupla = pg_fetch_assoc(pg_query("select count(*) as inscritas
+                                       from materias_x_alumnos inner join (select max(lapso) as lapso
+                                                                            from lapsos) as periodo
+                                            on materias_x_alumnos.lapso = periodo.lapso 
+                                            and materias_x_alumnos.id_alumno = $_SESSION[usuario]"));
+	$showprematricula = !($tupla['inscritas'] > 0);
+
+	if(!$showprematricula && $app['controller'] == 'prematricula')
+		$app['controller'] = 'prematricula-fija';
+	
 	require_once('layouts/default.php');
+}
 ?>
