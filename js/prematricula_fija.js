@@ -1,24 +1,58 @@
-$(document).ready(function () {
-    $('.prematricula').hide();
-    $('#status').hide();
+function cargarPrematriculaFija() {
     $.ajax({
         async: false,
         url: basedir + '/json/prematricula_fija.php',
         error: function () {
-            $('#status').html('No se pudo mostrar su prematricula').show();
+            $('#status').html('No se pudo mostrar su prematrícula').show();
         },
         success: function (json) {
-            var prematricula = JSON.parse(json);
-            var colores = ['materia1', 'materia2', 'materia3', 'materia4', 'materia5', 'materia6', 'materia7', 'materia8', 'materia9', 'materia10'];
-            var html = '';
-
-            html += '<tr><td><h2>Lapso: ' + prematricula.lapso + '</h2></td></tr><tr><td><h2>Creditos en curso: ' + prematricula.creditos_curso + '</h2></td></tr><tr><td><h2>Creditos restantes: ' + prematricula.creditos_restantes + '</h2></td></tr><tr><td><h2>Materias a cursar:</h2/></td></tr><tr><td>&nbsp;</td></tr>';
-
-            for (var i in prematricula.materias)
-                html += '<tr><td><div id="' + colores[i] + '">' + prematricula.materias[i] + '</div></td></tr>';
-
-            $('.prematricula').append(html);
-            $('.prematricula').show();
+            inflarPrematriculaFija(JSON.parse(json));
         }
     });
+}
+
+function inflarPrematriculaFija(prematricula) {
+    var colores = ['materia1', 'materia2', 'materia3', 'materia4', 'materia5', 'materia6', 'materia7', 'materia8', 'materia9', 'materia10'];
+    var html = '';
+
+    for (var i in prematricula.materias)
+        html += '<li id="' + colores[i] + '">' + prematricula.materias[i] + '</li>';
+
+    $('.prematricula').append(html);
+    $('.prematricula').show();
+    $('.prematricula').after('<p class="info"><i class="fa fa-info"></i>Estás cursando ' +
+        prematricula.creditos_curso + ' créditos y te faltan ' + prematricula.creditos_restantes + ' créditos para graduarte.');
+    $('#lapso').html(prematricula.lapso);
+}
+
+function cargarFuturosSemestres() {
+    $.ajax({
+        url: basedir + '/json/ruta_futura_fija.php',
+        type: 'POST',
+        error: function () {
+            alert('Ocurrió un error mientras se visualizaba el futuro.');
+        },
+        success: function (json) {
+            inflarFuturosSemestres(JSON.parse(json));
+        }
+    });
+}
+
+function inflarFuturosSemestres(semestres) {
+    var html = '';
+    for (i = 0; i < semestres.length; ++i) {
+        html += '<ul><li>' + semestres[i].lapso + '</li>';
+        for (j = 0; j < semestres[i].materias.length; ++j) {
+            html += '<li>' + semestres[i].materias[j] + '</li>';
+        }
+        html += ' <li>Créditos restantes: ' + semestres[i].creditos_restantes + ' </li></ul > ';
+    }
+    $('#futuros-semestres').html(html + '<div class="fix"></div>');
+}
+
+$(document).ready(function () {
+    $('.prematricula').hide();
+    $('#status').hide();
+    cargarPrematriculaFija();
+    cargarFuturosSemestres();
 });
