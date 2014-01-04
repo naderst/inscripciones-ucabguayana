@@ -81,13 +81,12 @@
 .info i {
     background-color: #555;
     border-radius: 1.4em;
-    color:#FFF;
+    color: #FFF;
     width: 1.4em;
     height: 1.4em;
     text-align: center;
     line-height: 1.5em;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
-}
 }
 @media only screen and (min-width: 540px) {
     #futuros-semestres ul {
