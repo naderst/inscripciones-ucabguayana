@@ -112,8 +112,9 @@ $(document).ready(function () {
         else
             $(e.target).closest('tr').children('td').css('background-color', 'rgba(0,0,0,0)');
     });
-    
-    $('#desmarcar').click(function () {
+
+    //Evento delegado
+    $(document).on('click', '#desmarcar', function () {
         console.log('Prueba');
     });
 });
