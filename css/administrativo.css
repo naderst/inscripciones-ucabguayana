@@ -8,29 +8,98 @@
 */
 
 .administrativo .lista {
-    border: 2px solid #12B6EB;
+    border: 3px solid #12B6EB;
     border-radius: 5px;
     margin-top: 2px;
     outline: none;
     font-size: 110%;
 }
 .administrativo .lista:hover {
-    border: 4px solid #12B6EB;
+    border: 3px solid rgba(18, 182, 235, 0.4);
 }
 .administrativo .lista:focus {
-    border: 4px solid #12B6EB;
+    border: 3px solid rgba(18, 182, 235, 0.4);
 }
 .administrativo td {
     padding-right: 5%;
 }
+.estudiantes {
+    border-collapse: collapse;
+    border: none;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    margin: 20px auto;
+    text-align: center;
+    width: 100%;
+}
+.estudiantes th,
+.estudianes td {
+    box-shadow: inset 0 -1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(0, 0, 0, 0.25);
+}
+.estudiantes th {
+    -webkit-font-smoothing: antialiased;
+    background-color: #12B6EB;
+    color: #FFF;
+    cursor: default;
+    padding: 10px 40px;
+    font-size: 20px;
+    font-weight: normal;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.estudiantes td {
+    border-bottom: 1px solid #12B6EB;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 18px;
+    padding: 10px 40px;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.estudiantes tr {
+    -webkit-transition: background 0.3s, box-shadow 0.3s;
+    -moz-transition: background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+.estudiantes tr:hover {
+    background: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+.informacion {
+    margin: 8px auto;
+}
+.letras {
+    font-size: 25px;
+    margin: 5px auto;
+}
+.letras td {
+    padding: 0px 8px;
+}
+.letras td:hover {
+    color: #12B6EB;
+    cursor: pointer;
+}
 #buscar {
-    background-color:transparent;
-    border:transparent;
-    font-size:140%;
-    outline:none;
-    padding-top:10%;
+    background-color: transparent;
+    border: transparent;
+    font-size: 140%;
+    outline: none;
+    padding-top: 10%;
 }
 #buscar:hover {
-    color:#12B6EB;
-    cursor:pointer;
+    color: #12B6EB;
+    cursor: pointer;
+}
+#desmarcar {
+    background-color: transparent;
+    border: transparent;
+    font-size: 100%;
+    font-weight: normal;
+    outline: none;
+}
+#desmarcar:hover {
+    color: #12B6EB;
+    cursor: pointer;
+}
+#status {
+    color: #FF0000;
+    margin-top: 20px;
 }

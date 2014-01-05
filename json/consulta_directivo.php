@@ -6,7 +6,6 @@ if(!isset($_SESSION["director"])){
          * header("Location: /modulo/autenticacion/index.php"); 
          */
 }
-
 $conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
 
 if(isset($_POST['creditos']) and isset($_POST['flag'])){
@@ -40,6 +39,7 @@ $consulta = pg_query("select distinct alumnos.id_alumno,alumnos.nombre_alumno,al
                              ((isset($_POST['periodo']))?"and materias_x_alumnos.lapso = $_POST[periodo] ":"").
                              ((isset($_POST['asignatura']))?"and materias_x_alumnos.id_materia = $_POST[asignatura] ":"").
                              ((isset($_POST['profesor']))?"and materias_x_profesores.id_profesor = $_POST[profesor] ":"").
+                             ((isset($_POST['letra']))?"and lower(substr(alumnos.apellido_alumno,1,1)) = '$_POST[letra]' ":"").
                              "order by apellido_alumno");
 $respuesta = array();
 for($i = 0 ; ($tupla = pg_fetch_assoc($consulta)) ; $i++)

@@ -5,9 +5,13 @@
 </section>
 <article class="contenido">
     <div class="contenedor">
-        <div id="status">Solicitando información...</div>
-        <h4>Busque estudiantes de acuerdo a los siguiente parámetros:</h4><br>
+        <h4>Busque estudiantes de acuerdo a los siguiente parámetros:</h4>
+        <br>
         <table class="administrativo">
+        </table>
+        <div id="status">Solicitando información...</div>
+        <div class="informacion"></div>
+        <table class="letras">
         </table>
         <table class="estudiantes">
         </table>
