@@ -37,8 +37,8 @@
                             <i class="fa fa-clock-o"></i>Horario</a>
                     </li>
                     <li class="usuario">
-                        <a title="Cerrar sesión" href="javascript:void(0)">
-                            <i class="fa fa-user"></i><span id="nombre-usuario"></span></a>
+                        <a title="Cerrar sesión" href="<?php echo $app['basedir'].'/logout'; ?>">
+                            <i class="fa fa-user"></i><i class="fa fa-sign-out"></i><span id="nombre-usuario"></span></a>
                     </li>
                     <li class="fix"></li>
                 </ul>

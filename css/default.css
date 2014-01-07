@@ -97,6 +97,12 @@ nav ul.inline li {
     color: #14B4F0;
 }
 .menu .usuario {
+    float: right;
+}
+.menu .usuario #nombre-usuario {
+    display: none;
+}
+.menu .usuario .fa.fa-user {
     display: none;
 }
 .titulo {
@@ -144,11 +150,16 @@ nav ul.inline li {
     }
 }
 @media only screen and (min-width: 420px) {
-    .menu .usuario {
-        display: block;
-        float: right;
-    }
     .menu .usuario a {
         font-weight: 300;
+    }
+    .menu .usuario #nombre-usuario {
+        display: inline;
+    }
+    .menu .usuario .fa.fa-user {
+        display: inline;
+    }
+    .menu .usuario .fa.fa-sign-out {
+        display: none;
     }
 }
