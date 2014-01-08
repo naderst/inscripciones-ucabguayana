@@ -28,6 +28,9 @@
         <div class="contenedor">
             <nav>
                 <ul class="menu inline">
+                    <?php
+                        if(!isset($_SESSION['director'])) {
+                    ?>
                     <li>
                         <a href="<?php echo $app['basedir'].'/prematricula'; ?>">
                             <i class="fa fa-th-list"></i>Prematrícula</a>
@@ -36,6 +39,7 @@
                         <a href="<?php echo $app['basedir'].'/horario'; ?>">
                             <i class="fa fa-clock-o"></i>Horario</a>
                     </li>
+                    <?php } ?>
                     <li class="usuario">
                         <a title="Cerrar sesión" href="<?php echo $app['basedir'].'/logout'; ?>">
                             <i class="fa fa-user"></i><i class="fa fa-sign-out"></i><span id="nombre-usuario"></span></a>

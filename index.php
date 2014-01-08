@@ -21,7 +21,15 @@ if($app['controller'] == 'logout') {
 	header('Location: '.$app['basedir'].'/');
 }
 
-if(!isset($_SESSION['usuario']))
+if(isset($_SESSION['director']) && $app['controller'] != 'administrativo') {
+	header('Location: '.$app['basedir'].'/administrativo');
+}
+
+if(isset($_SESSION['usuario']) && $app['controller'] == 'administrativo') {
+	header('Location: '.$app['basedir'].'/');
+}
+
+if(!isset($_SESSION['usuario']) && !isset($_SESSION['director']))
 	require_once('modulos/autenticacion/index.php');
 else {
 	$conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
