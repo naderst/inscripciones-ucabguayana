@@ -1,27 +1,35 @@
 @charset "utf-8";
 
-/*  Sistema de prematrícula - UCAB Guayana
-    Tema: Prematrícula fija ya seleccionada por el estudiante
+/*  Sistema administrativo - UCAB Guayana
+    Tema: Modulo de consultas para personal admiinistrativo
     Tema URL: http://github.com/naderst/inscripciones-ucabguayana
     Autores: https://github.com/naderst/inscripciones-ucabguayana/graphs/contributors
     Version: 1.0
 */
 
 .administrativo .lista {
-    border: 3px solid #12B6EB;
+    border: 2px solid #12B6EB;
     border-radius: 5px;
+    font-size: 110%;
     margin-top: 2px;
     outline: none;
-    font-size: 110%;
 }
 .administrativo .lista:hover {
-    border: 3px solid rgba(18, 182, 235, 0.4);
+    border: 2px solid rgba(18, 182, 235, 0.35);
 }
 .administrativo .lista:focus {
-    border: 3px solid rgba(18, 182, 235, 0.4);
+    border: 2px solid rgba(18, 182, 235, 0.35);
 }
 .administrativo td {
     padding-right: 5%;
+}
+.contenedor h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: lighter;
 }
 .estudiantes {
     border-collapse: collapse;
@@ -70,8 +78,15 @@
     font-size: 25px;
     margin: 5px auto;
 }
+.letras a {
+    color: #000;
+}
+.letras a:hover {
+    color: #12B6EB;
+}
 .letras td {
     padding: 0px 8px;
+    text-decoration: underline;
 }
 .letras td:hover {
     color: #12B6EB;
@@ -81,8 +96,8 @@
     background-color: transparent;
     border: transparent;
     font-size: 140%;
+    margin-top: 10%;
     outline: none;
-    padding-top: 10%;
 }
 #buscar:hover {
     color: #12B6EB;
@@ -90,9 +105,12 @@
 }
 #desmarcar {
     background-color: transparent;
-    border: transparent;
+    border: none;
+    border-radius: 5px;
+    text-decoration: underline;
     font-size: 100%;
     font-weight: normal;
+    margin-right: 15px;
     outline: none;
 }
 #desmarcar:hover {
