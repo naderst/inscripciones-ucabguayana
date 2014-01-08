@@ -5,7 +5,7 @@
 </section>
 <article class="contenido">
     <div class="contenedor">
-        <h4>Busque estudiantes de acuerdo a los siguiente parámetros:</h4>
+        <p>Busque estudiantes de acuerdo a los siguiente parámetros:</p>
         <br>
         <table class="administrativo">
         </table>

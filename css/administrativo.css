@@ -6,7 +6,9 @@
     Autores: https://github.com/naderst/inscripciones-ucabguayana/graphs/contributors
     Version: 1.0
 */
-
+.administrativo {
+     width:100%;   
+}
 .administrativo .lista {
     border: 2px solid #12B6EB;
     border-radius: 5px;
@@ -22,6 +24,10 @@
 }
 .administrativo td {
     padding-right: 5%;
+}
+.administrativo td label {
+    font-size: 1.2em;
+    display: block;
 }
 .contenedor h1,
 h2,
