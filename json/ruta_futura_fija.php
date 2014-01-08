@@ -3,10 +3,7 @@ require_once('../config.php');
 
 session_start();
 if(!isset($_SESSION["usuario"])){
-        /*session_destroy();
-         * header("Location: /modulo/autenticacion/index.php"); 
-         */
-	$_SESSION["usuario"] = 22588454;
+    header("Location: ".$app['basedir']."/autenticacion");  
 }
 
 $conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
