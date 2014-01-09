@@ -11,34 +11,34 @@
             <tr>
                 <td>
                     <label>Profesor</label>
-                    <br>
                     <select class="lista profesor">
                         <option value="">Desplegar lista</option>
                     </select>
                 </td>
                 <td>
                     <label>Período</label>
-                    <br>
                     <select class="lista periodo">
                         <option value="">Desplegar lista</option>
                     </select>
                 </td>
                 <td>
                     <label>Materia</label>
-                    <br>
                     <select class="lista materia">
                         <option value="">Desplegar lista</option>
                     </select>
                 </td>
             </tr>
+            <tr class="espacio">
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
             <tr>
                 <td>
-                    <br>
                     <label>Créditos acumulados</label>
                     <input class="lista creditos">
                 </td>
                 <td>
-                    <br>
                     <label>Condición de los créditos</label>
                     <select class="lista flag" disabled="disabled">
                         <option value="2">Menor</option>
@@ -47,7 +47,6 @@
                     </select>
                 </td>
                 <td>
-                    <br>
                     <label>
                         <input type="checkbox" class="resultados" value="todos">Mostrar todos los resultados</label>
                 </td>

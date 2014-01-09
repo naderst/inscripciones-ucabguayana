@@ -28,7 +28,7 @@
     border: 2px solid rgba(18, 182, 235, 0.35);
 }
 .administrativo td {
-    padding-right: 5%;
+    padding-right: 30px;
 }
 .administrativo td label {
     font-size: 1.2em;
@@ -80,6 +80,9 @@ h6 {
 .estudiantes tr:hover {
     background: rgba(0, 0, 0, 0.15);
     cursor: pointer;
+}
+.espacio td {
+     padding:10px 0;   
 }
 .informacion {
     margin: 8px auto;
@@ -147,7 +150,7 @@ h6 {
         padding: 10px 40px;
     }
 }
-@media only screen and (min-width: 845px) {
+@media only screen and (min-width: 860px) {
     .administrativo {
         display: block;
     }
