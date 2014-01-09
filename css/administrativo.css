@@ -6,20 +6,25 @@
     Autores: https://github.com/naderst/inscripciones-ucabguayana/graphs/contributors
     Version: 1.0
 */
+
 .administrativo {
-     width:100%;   
+    display: none;
+    width: 100%;
 }
-.administrativo .lista {
+.administrativo .lista,
+.lista-letras .lista {
     border: 2px solid #12B6EB;
     border-radius: 5px;
     font-size: 110%;
     margin-top: 2px;
     outline: none;
 }
-.administrativo .lista:hover {
+.administrativo .lista:hover,
+.lista-letras .lista:hover {
     border: 2px solid rgba(18, 182, 235, 0.35);
 }
-.administrativo .lista:focus {
+.administrativo .lista:focus,
+.lista-letras .lista:focus {
     border: 2px solid rgba(18, 182, 235, 0.35);
 }
 .administrativo td {
@@ -43,7 +48,8 @@ h6 {
     border-radius: 8px;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    margin: 20px auto;
+    margin: 0px auto;
+    margin-top: 20px;
     text-align: center;
     width: 100%;
 }
@@ -56,7 +62,6 @@ h6 {
     background-color: #12B6EB;
     color: #FFF;
     cursor: default;
-    padding: 10px 40px;
     font-size: 20px;
     font-weight: normal;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
@@ -65,7 +70,6 @@ h6 {
     border-bottom: 1px solid #12B6EB;
     color: rgba(0, 0, 0, 0.85);
     font-size: 18px;
-    padding: 10px 40px;
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
 }
 .estudiantes tr {
@@ -81,6 +85,7 @@ h6 {
     margin: 8px auto;
 }
 .letras {
+    display: none !important;
     font-size: 25px;
     margin: 5px auto;
 }
@@ -98,16 +103,22 @@ h6 {
     color: #12B6EB;
     cursor: pointer;
 }
-#buscar {
+.lista-letras {
+    display: block !important;
+}
+.buscar {
     background-color: transparent;
     border: transparent;
     font-size: 140%;
-    margin-top: 10%;
+    margin-top: 12px;
     outline: none;
 }
-#buscar:hover {
+.buscar:hover {
     color: #12B6EB;
     cursor: pointer;
+}
+#combo-letras {
+    min-width: 100px;
 }
 #desmarcar {
     background-color: transparent;
@@ -123,7 +134,32 @@ h6 {
     color: #12B6EB;
     cursor: pointer;
 }
+#general {
+    display: block;
+}
 #status {
     color: #FF0000;
     margin-top: 20px;
+}
+@media only screen and (min-width: 450px) {
+    .estudiantes th,
+    .estudiantes td {
+        padding: 10px 40px;
+    }
+}
+@media only screen and (min-width: 845px) {
+    .administrativo {
+        display: block;
+    }
+    #general {
+        display: none;
+    }
+}
+@media only screen and (min-width: 904px) {
+    .letras {
+        display: block !important;
+    }
+    .lista-letras {
+        display: none !important;
+    }
 }

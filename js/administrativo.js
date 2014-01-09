@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $('.administrativo').hide();
     $('.informacion').hide();
     $('.letras').hide();
+    $('.lista-letras').hide();
     $('.estudiantes').hide();
     $('#status').hide();
 
@@ -14,43 +14,45 @@ $(document).ready(function () {
         },
         success: function (json) {
             var data_inicial = JSON.parse(json);
-            var html = '<tr><td><label>Profesor</label></td><td><label>Período</label></td><td><label>Materia</label></td></tr><tr><td><select class="lista" id="profesor"><option value="">Desplegar lista</option>';
+            var html = '';
 
             for (var i in data_inicial.profesor)
                 html += '<option value="' + data_inicial.profesor[i].cedula + '">' + data_inicial.profesor[i].nombre + ' ' + data_inicial.profesor[i].apellido + '</option>';
 
-            html += '</select></td><td><select class="lista" id="periodo"><option value="">Desplegar lista</option>';
+            $('.profesor').append(html);
+            html = '';
 
             for (var i in data_inicial.periodo)
                 html += '<option value="' + data_inicial.periodo[i] + '">' + data_inicial.periodo[i] + '</option>';
 
-            html += '</select></td><td><select class="lista" id="materia"><option value="">Desplegar lista</option>';
+            $('.periodo').append(html);
+            html = '';
 
             for (var i in data_inicial.materia)
                 html += '<option value="' + data_inicial.materia[i].codigo + '">' + data_inicial.materia[i].nombre + '</option>';
-
-            html += '</select></td></tr><tr><td><br><label>Créditos acumulados</label><input class="lista" id="creditos"></td><td><br><label>Condición de los créditos</label><select class="lista" id="flag" disabled="disabled"><option value="2">Menor</option><option value="0">Igual</option><option value="1">Mayor</option></select></td><td><br><label><input type="checkbox" id="resultados" value="todos"> Mostrar todos los resultados</label></td></tr><tr><td><button id="buscar" type="button"><i class="fa fa-search"></i>Buscar</button></td></tr>';
-
-            $('.administrativo').append(html);
-            $('.administrativo').show();
+            
+            $('.materia').append(html);
+            html = '';
         }
     });
 
     //Consulta del usuario a la base de datos
-    $(document).on('click', '#buscar', function () {
+    $(document).on('click', '.buscar', function () {
         $('.informacion').hide();
         $('.letras').hide();
+        $('.lista-letras').hide();
         $('.estudiantes').hide();
+        $('#status').hide();
         $.ajax({
             async: false,
             url: basedir + '/json/consulta_directivo.php',
             type: 'POST',
             data: {
-                profesor: $('#profesor').val() != '' ? $('#profesor').val() : '',
-                periodo: $('#periodo').val() != '' ? $('#periodo').val() : '',
-                asignatura: $('#materia').val() != '' ? $('#materia').val() : '',
-                creditos: $('#creditos').val() != '' ? $('#creditos').val() : '',
-                flag: $('#creditos').val() != '' ? $('#flag').val() : '',
+                profesor: $('.profesor').val() != '' ? $('.profesor').val() : '',
+                periodo: $('.periodo').val() != '' ? $('.periodo').val() : '',
+                asignatura: $('.materia').val() != '' ? $('.materia').val() : '',
+                creditos: $('.creditos').val() != '' ? $('.creditos').val() : '',
+                flag: $('.creditos').val() != '' ? $('.flag').val() : '',
                 letra: ''
             },
             error: function () {
@@ -61,12 +63,14 @@ $(document).ready(function () {
                 if (estudiantes.length > 0) {
                     var abc = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
                     var info = '<p><button id="desmarcar" type="button"><i class="fa fa-check"></i>Desmarcar todo</button><i class="fa fa-info"></i>Haga click sobre una fila para remarcar y presione nuevamente para desmarcar</p>';
+                    var lista_letras = '<select class="lista" id="combo-letras">';
                     var barra_letras = '<tr>';
                     var html = '<thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th></tr></thead><tbody>';
 
-                    if ($('#resultados').is(':checked'))
+                    if ($('.resultados').is(':checked'))
                         for (var i in abc) {
                             barra_letras += '<td><a href="#' + abc[i] + '">' + abc[i] + '</a></td>';
+                            lista_letras += '<option value="' + abc[i] + '">' + abc[i] + '</option>';
                             html += '<tr style="border-bottom: 2px solid #FFD100"><td id="' + abc[i] + '" colspan="3">' + abc[i] + '</td></tr>'
                             var j;
                             for (j = 0; j < estudiantes.length && abc[i] == estudiantes[j].apellido.charAt(0); j++)
@@ -75,20 +79,25 @@ $(document).ready(function () {
                                 html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
                         } else {
                         barra_letras += '<td id="A" style="color: #12B6EB">A</td>';
+                        lista_letras += '<option value="A">A</option>';
                         var i;
-                        for (i = 1; i < abc.length; i++)
+                        for (i = 1; i < abc.length; i++) {
                             barra_letras += '<td id="' + abc[i] + '">' + abc[i] + '</td>';
+                            lista_letras += '<option value="' + abc[i] + '">' + abc[i] + '</option>';
+                        }
                         for (i = 0; i < estudiantes.length && abc[0] == estudiantes[i].apellido.charAt(0); i++)
                             html += '<tr><td>' + estudiantes[i].apellido + '</td><td>' + estudiantes[i].nombre + '</td><td>' + estudiantes[i].cedula + '</td></tr>';
                         if (i == 0)
                             html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
                     }
 
+                    lista_letras += '</select>';
                     barra_letras += '</tr>';
                     html += '</tbody>';
 
                     $('.informacion').html(info).show();
                     $('.letras').html(barra_letras).show();
+                    $('.lista-letras').html(lista_letras).show();
                     $('.estudiantes').html(html).show();
                 } else
                     $('.informacion').html('<p align="center">No se encontraron resultados</p>').show();
@@ -97,7 +106,7 @@ $(document).ready(function () {
     });
 
     //Validación del campo de créditos acumulados para que sea sólo numérico
-    $(document).on('keypress', '#creditos', function (evento) {
+    $(document).on('keypress', '.creditos', function (evento) {
         var key;
         if (window.event) // IE
         {
@@ -130,16 +139,22 @@ $(document).ready(function () {
     });
 
     //Habilitar o deshabilitar condición de los créditos
-    $(document).on('change', '#creditos', function () {
-        if ($('#creditos').val() != '')
-            $('#flag').prop('disabled', false);
+    $(document).on('change', '.creditos', function () {
+        if ($('.creditos').val() != '')
+            $('.flag').prop('disabled', false);
         else
-            $('#flag').prop('disabled', 'disabled');
+            $('.flag').prop('disabled', 'disabled');
+    });
+    $(document).on('change', '#general .creditos', function () {
+        if ($('#general .creditos').val() != '')
+            $('.flag').prop('disabled', false);
+        else
+            $('.flag').prop('disabled', 'disabled');
     });
 
-    //Buscar resultados por letra
-    $(document).on('click', '.letras td', function (e) {
-        if (!$('#resultados').is(':checked')) {
+    //Buscar resultados por letra con la barra de letras
+    $(document).on('click', '.letras td', function () {
+        if (!$('.resultados').is(':checked')) {
             $('.estudiantes').hide();
             var letra = $(this).attr('id');
             $.ajax({
@@ -147,12 +162,12 @@ $(document).ready(function () {
                 url: basedir + '/json/consulta_directivo.php',
                 type: 'POST',
                 data: {
-                    profesor: $('#profesor').val() != '' ? $('#profesor').val() : '',
-                    periodo: $('#periodo').val() != '' ? $('#periodo').val() : '',
-                    asignatura: $('#materia').val() != '' ? $('#materia').val() : '',
-                    creditos: $('#creditos').val() != '' ? $('#creditos').val() : '',
-                    flag: $('#creditos').val() != '' ? $('#flag').val() : '',
-                    letra: $(this).attr('id').toLowerCase()
+                    profesor: $('.profesor').val() != '' ? $('.profesor').val() : '',
+                    periodo: $('.periodo').val() != '' ? $('.periodo').val() : '',
+                    asignatura: $('.materia').val() != '' ? $('.materia').val() : '',
+                    creditos: $('.creditos').val() != '' ? $('.creditos').val() : '',
+                    flag: $('.creditos').val() != '' ? $('.flag').val() : '',
+                    letra: letra.toLowerCase()
                 },
                 error: function () {
                     $('#status').html('Disculpe, no se pudo realizar su consulta, por favor intente nuevamente').show();
@@ -179,6 +194,48 @@ $(document).ready(function () {
                     $('.estudiantes').html(html).show();
                 }
             });
+        }
+    });
+
+    //Buscar resultados por letra con el combobox de letras
+    $(document).on('change', '.lista-letras #combo-letras', function () {
+        var letra = $(this).val();
+        if (!$('.resultados').is(':checked')) {
+            $('.estudiantes').hide();
+            $.ajax({
+                async: false,
+                url: basedir + '/json/consulta_directivo.php',
+                type: 'POST',
+                data: {
+                    profesor: $('.profesor').val() != '' ? $('.profesor').val() : '',
+                    periodo: $('.periodo').val() != '' ? $('.periodo').val() : '',
+                    asignatura: $('.materia').val() != '' ? $('.materia').val() : '',
+                    creditos: $('.creditos').val() != '' ? $('.creditos').val() : '',
+                    flag: $('.creditos').val() != '' ? $('.flag').val() : '',
+                    letra: letra.toLowerCase()
+                },
+                error: function () {
+                    $('#status').html('Disculpe, no se pudo realizar su consulta, por favor intente nuevamente').show();
+                },
+                success: function (json) {
+                    var estudiantes = JSON.parse(json);
+                    var html = '<thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th></tr></thead><tbody>';
+                    var i;
+
+                    for (i = 0; i < estudiantes.length; i++)
+                        html += '<tr><td>' + estudiantes[i].apellido + '</td><td>' + estudiantes[i].nombre + '</td><td>' + estudiantes[i].cedula + '</td></tr>';
+                    if (i == 0)
+                        html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
+
+                    html += '</tbody>';
+
+                    $('.estudiantes').html(html).show();
+                }
+            });
+        } else {
+            $('html, body').animate({
+                scrollTop: $('#' + letra).offset().top
+            }, 1000);
         }
     });
 });
