@@ -11,9 +11,10 @@
     <link href='<?php echo $app['basedir'].'/css/default.css'; ?>' rel='stylesheet' type='text/css'>
     <link href='<?php echo $app['basedir'].'/css/font-awesome.min.css'?>' rel='stylesheet' type='text/css'>
     <?php
-        if($app['controller'] == 'prematricula')
+        if($app['controller'] == 'prematricula'){
             echo "<link href='$app[basedir]/css/prematricula.css' rel='stylesheet' type='text/css'>";
             echo "<link href='$app[basedir]/css/preload.css' rel='stylesheet' type='text/css'>";
+        }
         if($app['controller'] == 'horario')
             echo "<link href='$app[basedir]/css/horario.css' rel='stylesheet' type='text/css'>";
         if($app['controller'] == 'prematricula-fija')
