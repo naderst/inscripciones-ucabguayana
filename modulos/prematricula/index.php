@@ -12,7 +12,7 @@
         <section id="materias-especiales"></section>
         <p id="creditos" class="small">
             <i class="fa fa-bookmark-o"></i>Créditos a cursar: 0</p>
-        <a id="enviar-prematricula" class="boton" href="javascript:void(0)">Enviar</a>
+        <a id="enviar-prematricula" class="boton" href="javascript:void(0)">Aceptar</a>
         <div class="fix"></div>
     </div>
 </article>

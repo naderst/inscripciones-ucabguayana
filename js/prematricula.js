@@ -34,7 +34,7 @@ function inflarPrematricula(prematricula) {
         switch (parseInt(prematricula.materias[i].flag)) {
         case 0:
             html += '<li><a data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' + prematricula.materias[i].creditos +
-                '" href="javascript:void(0)">' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
+                '" href="javascript:void(0)"><span class="creditos">' + prematricula.materias[i].creditos + ' UC</span>' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
             break;
         case -1:
             htmlEspeciales += '<p class="info"><i class="fa fa-info"></i>Ya puedes inscribir ' + prematricula.materias[i].nombre +
@@ -42,7 +42,7 @@ function inflarPrematricula(prematricula) {
             break;
         default:
             htmlDesplazadas += '<li><a class="disabled" data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' +
-                prematricula.materias[i].creditos + '" href="javascript:void(0)">' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
+                prematricula.materias[i].creditos + '" href="javascript:void(0)"><span class="creditos disabled">' + prematricula.materias[i].creditos + ' UC</span>' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
             break;
         }
     }
@@ -107,8 +107,10 @@ function actualizarCreditos() {
             }
             if (habilitar) {
                 $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').removeClass('disabled');
+                $('a[data-codigo="' + prematriculaBase[i].codigo + '"] span').removeClass('disabled');
             } else {
                 $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').addClass('disabled');
+                $('a[data-codigo="' + prematriculaBase[i].codigo + '"] span').addClass('disabled');
                 $('a[data-codigo="' + prematriculaBase[i].codigo + '"] i').removeClass('fa-check-circle-o');
                 $('a[data-codigo="' + prematriculaBase[i].codigo + '"] i').addClass('fa-circle-o');
                 if (materiasSeleccionadas.indexOf(prematriculaBase[i].codigo) != -1) {
@@ -125,8 +127,10 @@ function actualizarCreditos() {
     for (i = 0; i < prematriculaBase.length; ++i) {
         if ($.inArray(prematriculaBase[i].codigo, materiasSeleccionadas) == -1 && (creditosSeleccionados + parseInt(prematriculaBase[i].creditos) > creditosMaximos)) {
             $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').addClass('disabled');
+            $('a[data-codigo="' + prematriculaBase[i].codigo + '"] span').addClass('disabled');
         } else if (parseInt(prematriculaBase[i]) == 0) {
             $('a[data-codigo="' + prematriculaBase[i].codigo + '"]').removeClass('disabled');
+            $('a[data-codigo="' + prematriculaBase[i].codigo + '"] span').removeClass('disabled');
         }
     }
 

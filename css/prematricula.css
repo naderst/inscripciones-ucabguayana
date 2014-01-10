@@ -20,7 +20,7 @@
     color: #333;
     display: block;
     font-weight: 700;
-    padding: 8px 6px;
+    padding: 8px 6px 8px 0;
     position: relative;
     text-decoration: none;
     text-shadow: 1px 1px 0 #FFF
@@ -49,6 +49,26 @@
 #prematricula li:last-child a {
     border-radius: 0 0 6px 6px;
     border-bottom: 1px solid #DDD
+}
+#prematricula li .creditos {
+    background-color: #555;
+    padding: 9px;
+    margin-right: 8px;
+    color: #FFF;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.7);
+    box-shadow: inset -1px -1px 1px rgba(0,0,0,.5); 
+}
+#prematricula li .creditos.disabled {
+    background-color:#E5E5E5;
+    text-shadow: none;
+    box-shadow: inset -1px 0 1px #CCC; 
+    color: #BBB;
+}
+#prematricula li:first-child .creditos {
+    border-radius: 6px 0 0;
+}
+#prematricula li:last-child .creditos {
+    border-radius: 0 0  0 6px;
 }
 #futuros-semestres {
     width: 100%;
