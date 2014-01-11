@@ -27,27 +27,40 @@ function cargarPrematriculaBase() {
 
 function inflarPrematricula(prematricula) {
     var html = '';
-    var htmlDesplazadas = '';
     var htmlEspeciales = '';
+    var abreviaturas = ['1er', '2do', '3er', '4to', '5to', '6to', '7mo', '8vo', '9no', '10mo'];
+    var semestres = [];
 
     for (i = 0; i < prematricula.materias.length; ++i) {
         switch (parseInt(prematricula.materias[i].flag)) {
         case 0:
+
+            if ($.inArray(prematricula.materias[i].flag, semestres) == -1) {
+                semestres.push(prematricula.materias[i].flag);
+                html += '<li><a class="semestre" href="javascript:void(0)">' + abreviaturas[6] + ' semestre</a></li>';
+            }
+
             html += '<li><a data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' + prematricula.materias[i].creditos +
-                '" href="javascript:void(0)"><span class="creditos">' + prematricula.materias[i].creditos + ' UC</span>' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
+                '" href="javascript:void(0)"><span class="creditos">' + prematricula.materias[i].creditos + ' UC</span>' +
+                prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
             break;
         case -1:
             htmlEspeciales += '<p class="info"><i class="fa fa-info"></i>Ya puedes inscribir ' + prematricula.materias[i].nombre +
                 ', por favor dirígete a la escuela y pregunta por el profesor encargado de la materia.</p>';
             break;
         default:
-            htmlDesplazadas += '<li><a class="disabled" data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' +
+            if ($.inArray(prematricula.materias[i].flag, semestres) == -1) {
+                semestres.push(prematricula.materias[i].flag);
+                html += '<li><a class="semestre" href="javascript:void(0)">' + abreviaturas[parseInt(prematricula.materias[i].flag) + 6] + ' semestre</a></li>';
+            }
+
+            html += '<li><a class="disabled" data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' +
                 prematricula.materias[i].creditos + '" href="javascript:void(0)"><span class="creditos disabled">' + prematricula.materias[i].creditos + ' UC</span>' + prematricula.materias[i].nombre + '<i class="fa fa-circle-o"></i></a></li>';
             break;
         }
     }
 
-    $('#prematricula').html(html + htmlDesplazadas);
+    $('#prematricula').html(html);
     $('#materias-especiales').html(htmlEspeciales);
     $('#lapso').html(prematricula.lapso);
     creditosMaximos = parseInt(prematricula.creditos);

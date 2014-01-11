@@ -13,6 +13,7 @@
     list-style: none;
 }
 #prematricula li a {
+    background-color: #F0F0F0;
     background-image: linear-gradient(#F8F8F8, #F0F0F0);
     border-top: 1px solid #DDD;
     border-left: 1px solid #DDD;
@@ -34,6 +35,7 @@
 }
 #prematricula li a:hover {
     color: #FFF;
+    background-color: #12a6dd;
     background-image: linear-gradient(#14B4F0, #12a6dd);
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7)
 }
@@ -55,20 +57,27 @@
     padding: 9px;
     margin-right: 8px;
     color: #FFF;
-    text-shadow: 1px 1px 0 rgba(0,0,0,.7);
-    box-shadow: inset -1px -1px 1px rgba(0,0,0,.5); 
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .7);
+    box-shadow: inset -1px -1px 1px rgba(0, 0, 0, .5);
 }
 #prematricula li .creditos.disabled {
-    background-color:#E5E5E5;
+    background-color: #E5E5E5;
     text-shadow: none;
-    box-shadow: inset -1px 0 1px #CCC; 
+    box-shadow: inset -1px 0 1px #CCC;
     color: #BBB;
 }
 #prematricula li:first-child .creditos {
     border-radius: 6px 0 0;
 }
 #prematricula li:last-child .creditos {
-    border-radius: 0 0  0 6px;
+    border-radius: 0 0 0 6px;
+}
+#prematricula li .semestre {
+    text-align: center;
+    background-image: linear-gradient(#F8F8F8, #F0F0F0) !important;
+    background-color: #F0F0F0;
+    color: #333 !important;
+    text-shadow: 1px 1px 0 #FFF !important;
 }
 #futuros-semestres {
     width: 100%;
@@ -88,6 +97,7 @@
 }
 #futuros-semestres ul li:first-child {
     background-image: linear-gradient(#0F7FAB, #0C6D91);
+    background-color: #0C6D91;
     border-bottom: 4px solid #0F7FAB;
     border-radius: 6px 6px 0 0;
     font-weight: 700;
