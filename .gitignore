@@ -1,2 +1,5 @@
 # Archivo de configuración para la BD
 /config.php
+# Libreria mPDF
+/mpdf/*
+!/mpdf/README.md
