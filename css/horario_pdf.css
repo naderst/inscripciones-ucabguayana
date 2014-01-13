@@ -1,0 +1,51 @@
+/* Horario PDF */
+.horario {
+    border-spacing: 0px;
+    font-family: sans-serif;
+    margin: 10px 30px;
+}
+.horario .m1 {
+    background-color: #3498db
+}
+.horario .m2 {
+    background-color: #2ecc71
+}
+.horario .m3 {
+    background-color: #f1c40f
+}
+.horario .m4 {
+    background-color: #9b59b6
+}
+.horario .m5 {
+    background-color: #c0392b
+}
+.horario .m6 {
+    background-color: #ADD633
+}
+.horario .m7 {
+    background-color: #66A3FF
+}
+.horario .m8 {
+    background-color: #94FF70
+}
+.horario .m9 {
+    background-color: #FF4D4D
+}
+.horario .m10 {
+    background-color: #FF8533
+}
+.horario .materia {
+   font-size: 14px !important
+}
+.horario th {
+   font-size: 16px !important;
+   border-bottom: 1px solid #95a5a6;
+}
+.horario .hora {
+   font-size: 14px !important
+}
+.horario td {
+    text-align: center;
+    width: 14%;
+    border-bottom: 1px dashed #95a5a6;
+}

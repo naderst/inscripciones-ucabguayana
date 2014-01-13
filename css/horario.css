@@ -1,4 +1,11 @@
 /* Horario */
+a {
+    color: #14B4F0;
+    text-decoration: none;
+}
+a:hover {
+    color: #000;
+}
 .horario {
     display: none !important
 }

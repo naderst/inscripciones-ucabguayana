@@ -20,5 +20,9 @@
 			<table border="0" width="100%" cellspacing="0" cellpadding="0">
 			</table>
 		</div>
+		<br>
+		<center>
+			<a href="<?php echo $app['basedir'].'/pdf/horario.php'; ?>" target="_blank">Ver horario en PDF</a>
+		</center>
 	</div>
 </article>

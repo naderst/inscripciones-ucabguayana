@@ -70,7 +70,7 @@ $(document).ready(function () {
                         tmpmaterias += '<tr><td class="' + colores[horario[i][j][0] % 10] + '"><b>' + materias[horario[i][j][0]].materia + '</b><br>' + horas[i]  + ' - ' + horas[i+horario[i][j][1]] + '<br>' + materias[horario[i][j][0]].dias[ik].salon + '</td></tr>';
                     }
                 }
-                
+
                 if(tmpmaterias != '')
                     html += tmphtml + tmpmaterias;
             }
