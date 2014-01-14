@@ -21,11 +21,10 @@ $prematricula['lapso'] = $prematricula['creditos'] = 0;
 $prematricula['materias'] = array();
 $i = 0;
 
-$ma = "(select materias.id_materia 
-		from materias_x_alumnos inner join materias 
-		on (materias_x_alumnos.id_materia=materias.id_materia 
-			and (materias_x_alumnos.nota='ap' or ( materias_x_alumnos.nota<>'rp' and materias_x_alumnos.nota::int>=10)) 
-			and materias_x_alumnos.id_alumno = $_SESSION[usuario]))";
+$ma = "(select materias_x_alumnos.id_materia 
+		from materias_x_alumnos 
+		where (materias_x_alumnos.nota='ap' or ( materias_x_alumnos.nota<>'rp' and materias_x_alumnos.nota::int>=10)) 
+			and materias_x_alumnos.id_alumno = $_SESSION[usuario])";
 
 
 $mna = "(select id_materia from materias except $ma)";
@@ -115,6 +114,6 @@ while($tupla = pg_fetch_assoc($materias)){
     }
     
 }
- 
+$prematricula['semestre_base'] = $menor_semestre;
 echo json_encode($prematricula);
 ?>

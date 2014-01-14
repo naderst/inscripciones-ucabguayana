@@ -34,10 +34,9 @@ function inflarPrematricula(prematricula) {
     for (i = 0; i < prematricula.materias.length; ++i) {
         switch (parseInt(prematricula.materias[i].flag)) {
         case 0:
-
             if ($.inArray(prematricula.materias[i].flag, semestres) == -1) {
                 semestres.push(prematricula.materias[i].flag);
-                html += '<li><a class="semestre" href="javascript:void(0)">' + abreviaturas[6] + ' semestre</a></li>';
+                html += '<li><a class="semestre" href="javascript:void(0)">' + abreviaturas[parseInt(prematricula.semestre_base) - 1] + ' semestre</a></li>';
             }
 
             html += '<li><a data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' + prematricula.materias[i].creditos +
@@ -51,7 +50,8 @@ function inflarPrematricula(prematricula) {
         default:
             if ($.inArray(prematricula.materias[i].flag, semestres) == -1) {
                 semestres.push(prematricula.materias[i].flag);
-                html += '<li><a class="semestre" href="javascript:void(0)">' + abreviaturas[parseInt(prematricula.materias[i].flag) + 6] + ' semestre</a></li>';
+                html += '<li><a class="semestre" href="javascript:void(0)">' +
+                    abreviaturas[parseInt(prematricula.materias[i].flag) + parseInt(prematricula.semestre_base) - 1] + ' semestre</a></li>';
             }
 
             html += '<li><a class="disabled" data-codigo="' + prematricula.materias[i].codigo + '" data-creditos="' +
@@ -91,10 +91,11 @@ function cargarFuturosSemestres() {
 
 function inflarFuturosSemestres(semestres) {
     var html = '';
+    console.log(semestres);
     for (i = 0; i < semestres.length; ++i) {
         html += '<ul><li>' + semestres[i].lapso + '</li>';
         for (j = 0; j < semestres[i].materias.length; ++j) {
-            html += '<li>' + semestres[i].materias[j] + '</li>';
+            html += '<li><span class="creditos">'+ semestres[i].materias[j].creditos + ' UC</span>' + semestres[i].materias[j].nombre + '</li>';
         }
         html += ' <li>Créditos restantes: ' + semestres[i].creditos_restantes + ' </li></ul > ';
     }
