@@ -1,5 +1,15 @@
 Sistema de inscripción académica de la UCAB Guayana
 ====================================================
+## Configuración del sistema
+
+- Realizar una copia del archivo **config.modelo.php**
+- Renombrar la copia a **config.php**
+- Editar el archivo **config.php** con la configuración de la base de datos
+
+El parámetro de configuración **basedir** hace referencia al directorio base para la generación de rutas absolutas, por ejemplo:
+
+- Si el proyecto se encuentra dentro de la carpeta **inscripciones** sería: **/inscripciones**
+- Si el proyecto se encuentra en la carpeta raíz del servidor http se debe dejar en blanco
 
 ## Crear módulos
 
