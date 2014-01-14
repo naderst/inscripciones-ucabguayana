@@ -91,7 +91,6 @@ function cargarFuturosSemestres() {
 
 function inflarFuturosSemestres(semestres) {
     var html = '';
-    console.log(semestres);
     for (i = 0; i < semestres.length; ++i) {
         html += '<ul><li>' + semestres[i].lapso + '</li>';
         for (j = 0; j < semestres[i].materias.length; ++j) {

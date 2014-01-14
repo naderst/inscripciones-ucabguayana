@@ -43,7 +43,7 @@ function inflarFuturosSemestres(semestres) {
     for (i = 0; i < semestres.length; ++i) {
         html += '<ul><li>' + semestres[i].lapso + '</li>';
         for (j = 0; j < semestres[i].materias.length; ++j) {
-            html += '<li>' + semestres[i].materias[j] + '</li>';
+            html += '<li><span class="creditos">'+ semestres[i].materias[j].creditos + ' UC</span>' + semestres[i].materias[j].nombre + '</li>';
         }
         html += ' <li>Créditos restantes: ' + semestres[i].creditos_restantes + ' </li></ul > ';
     }

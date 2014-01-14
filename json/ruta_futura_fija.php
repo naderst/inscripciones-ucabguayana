@@ -12,11 +12,10 @@ $periodo = $periodo_inicial = pg_fetch_assoc(pg_query("select max(lapso) as laps
 
 for($i=0 ; $i<4 ; $i++){
     $creditos_disponibles = 22;
-    $ma = "(select materias.id_materia 
-		from materias_x_alumnos inner join materias 
-		on (materias_x_alumnos.id_materia=materias.id_materia 
-			and (materias_x_alumnos.nota='ap' or (materias_x_alumnos.nota is null or materias_x_alumnos.nota<>'rp' and materias_x_alumnos.nota::int>=10)) 
-			and materias_x_alumnos.id_alumno = $_SESSION[usuario]))";
+    $ma = "(select materias_x_alumnos.id_materia 
+		from materias_x_alumnos
+		where (materias_x_alumnos.nota='ap' or (materias_x_alumnos.nota is null or materias_x_alumnos.nota<>'rp' and materias_x_alumnos.nota::int>=10)) 
+			and materias_x_alumnos.id_alumno = $_SESSION[usuario])";
     
     $mna = "(select id_materia from materias except $ma)";
 
@@ -59,7 +58,7 @@ for($i=0 ; $i<4 ; $i++){
     
     $creditos_aprobados = pg_fetch_assoc(pg_query($ca));
     $futuro[$i]['creditos_restantes'] = (($aux=181-$creditos_aprobados['creditos'])<0)?0:$aux;
-    $futuro[$i]['lapso'] = $periodo['lapso'] = (($periodo['lapso'] % 2)==0)?$periodo['lapso']+99:$periodo['lapso']+1;
+    $futuro[$i]['lapso'] = $periodo['lapso'] = (($periodo['lapso'] % 100)==15)?$periodo['lapso']+10:$periodo['lapso']+90;
     $futuro[$i]['materias'] = array();
     pg_query("insert into lapsos values($periodo[lapso])");
     $j=0;
@@ -67,7 +66,8 @@ for($i=0 ; $i<4 ; $i++){
         if($tupla['creditos_materia']<=$creditos_disponibles){
             $creditos_disponibles -= $tupla['creditos_materia'];
             $futuro[$i]['creditos_restantes'] -= $tupla['creditos_materia'];
-            $futuro[$i]['materias'][$j++] = $tupla['nombre_materia'];
+            $futuro[$i]['materias'][$j++] = array('nombre' => $tupla['nombre_materia'],
+                                                  'creditos' => $tupla['creditos_materia']);
             pg_query("insert into materias_x_alumnos values($tupla[id_materia],$_SESSION[usuario],$periodo[lapso],'20',401)");
         }else
             break;
