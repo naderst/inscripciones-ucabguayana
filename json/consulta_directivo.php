@@ -27,7 +27,7 @@ else
     $axc = $condicion_axc = "";
 }
 
-$consulta = pg_query("select distinct alumnos.id_alumno,alumnos.nombre_alumno,alumnos.apellido_alumno
+$consulta = "(select distinct alumnos.id_alumno,alumnos.nombre_alumno,alumnos.apellido_alumno
                        from alumnos,materias_x_alumnos,materias_x_profesores $axc
                        where alumnos.id_alumno = materias_x_alumnos.id_alumno and
                              materias_x_profesores.id_materia = materias_x_alumnos.id_materia and
@@ -38,9 +38,26 @@ $consulta = pg_query("select distinct alumnos.id_alumno,alumnos.nombre_alumno,al
                              (($_POST['asignatura']!="")?"and materias_x_alumnos.id_materia = $_POST[asignatura] ":"").
                              (($_POST['profesor']!="")?"and materias_x_profesores.id_profesor = $_POST[profesor] ":"").
                              (($_POST['letra']!="")?"and lower(substr(alumnos.apellido_alumno,1,1)) = '$_POST[letra]' ":"").
-                             "order by apellido_alumno");
+                             "order by apellido_alumno)";
+
+if($_POST['semestre']!=""){
+    $mna = "((select al.*,materias.id_materia
+                    from $consulta as al,materias)
+            except 
+            (select al.*,materias_x_alumnos.id_materia
+                from $consulta as al inner join materias_x_alumnos
+                on(al.id_alumno = materias_x_alumnos.id_alumno 
+                    and (materias_x_alumnos.nota='ap' or ( materias_x_alumnos.nota<>'rp' and materias_x_alumnos.nota::int>=10))))
+            )";
+    $consulta = "select mna.id_alumno,mna.nombre_alumno,mna.apellido_alumno,min(materias.semestre)
+                from $mna as mna inner join materias 
+                    on (mna.id_materia = materias.id_materia)
+                group by mna.id_alumno,mna.nombre_alumno,mna.apellido_alumno
+                having min(materias.semestre) = $_POST[semestre]";
+}
+$aux = pg_query($consulta);
 $respuesta = array();
-for($i = 0 ; ($tupla = pg_fetch_assoc($consulta)) ; $i++)
+for($i = 0 ; ($tupla = pg_fetch_assoc($aux)) ; $i++)
     $respuesta[$i] = array('cedula' => $tupla['id_alumno'] ,
                            'nombre' => $tupla['nombre_alumno'] ,
                            'apellido' => $tupla['apellido_alumno']);

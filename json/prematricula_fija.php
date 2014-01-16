@@ -32,7 +32,7 @@ while($tupla=  pg_fetch_assoc($materias)){
     $prematricula['creditos_curso'] += $tupla['creditos_materia'];
     $prematricula['materias'][$i++] = $tupla['nombre_materia'];
 }
-$prematricula['creditos_restantes'] = (($aux=193-$creditos_aprobados['creditos']-$prematricula['creditos_curso'])<0)?0:$aux;
+$prematricula['creditos_restantes'] = (($aux=181-$creditos_aprobados['creditos']-$prematricula['creditos_curso'])<0)?0:$aux;
 
 echo json_encode($prematricula);
 ?>

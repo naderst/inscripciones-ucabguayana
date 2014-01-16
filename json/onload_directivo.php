@@ -30,5 +30,4 @@ for($i=0 ;($tupla = pg_fetch_assoc($materias)) ; $i++)
                                     'nombre' => $tupla['nombre_materia']);
 
 echo json_encode($onload);
-
 ?>
