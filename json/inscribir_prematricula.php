@@ -4,7 +4,7 @@ require_once('../config.php');
 $mensaje = array();
 session_start();
 if(!isset($_SESSION["usuario"])){
-    header("Location: ".$app['basedir']."/autenticacion");  
+        header("Location: ".$app['basedir']."/autenticacion");
 }
 $conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
 $validacion = pg_fetch_assoc(pg_query("select count(*) as inscritas
@@ -14,7 +14,7 @@ $validacion = pg_fetch_assoc(pg_query("select count(*) as inscritas
                                             and materias_x_alumnos.id_alumno = $_SESSION[usuario]"));
 
 if($validacion['inscritas']>0)
-    die ("Error acceso no permitido");
+    die ("ERROR ACCESO NO PERMITIDO");
 
 $periodo = $periodo_inicial = pg_fetch_assoc(pg_query("select max(lapso) as lapso from lapsos"));
 foreach ($_POST['materias'] as $codigo)

@@ -1,10 +1,12 @@
 <?php
 require_once('../config.php');
+
 $conexion = pg_connect("host=".$app["db"]["host"]." port=".$app["db"]["port"]." dbname=".$app["db"]["name"]." user=".$app["db"]["user"]." password=".$app["db"]["pass"]) OR die("No Se Pudo Realizar Conexion");
+
 $mensaje = array();
 $login = pg_query("select id_alumno
                     from alumnos
-                    where id_alumno = $_POST[usuario] and
+                    where id_alumno = '$_POST[usuario]' and
                           clave = md5('$_POST[clave]')");
 if(($tupla = pg_fetch_array($login))){
     session_start();
@@ -24,7 +26,7 @@ if(($tupla = pg_fetch_array($login))){
 else{
     $login = pg_query("select id_profesor
                         from cuentas_x_profesores
-                        where id_profesor = $_POST[usuario] and
+                        where id_profesor = '$_POST[usuario]' and
                               clave = md5('$_POST[clave]')");
     if(($tupla = pg_fetch_array($login))){
         session_start();
