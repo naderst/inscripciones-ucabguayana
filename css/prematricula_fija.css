@@ -16,7 +16,12 @@
     border-radius: 6px;
     padding: 8px;
     margin: 10px 0;
+    cursor: pointer;
     text-align: center;
+}
+.prematricula li span {
+    display: none;
+    width: 100%;
 }
 .info i {
     background-color: #555;
@@ -92,8 +97,8 @@
     margin-right: 5px;
     color: #FFF;
     text-shadow: none;
-    border-radius:100px;
-    font-size:0.8em;
+    border-radius: 100px;
+    font-size: 0.8em;
 }
 @media only screen and (min-width: 540px) {
     #futuros-semestres ul {
