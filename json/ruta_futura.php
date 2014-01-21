@@ -70,7 +70,7 @@ for($i=0 ; $i<4 ; $i++){
     $futuro[$i]['creditos_restantes'] = (($aux=181-$creditos_aprobados['creditos'])<0)?0:$aux;
     $futuro[$i]['lapso'] = $periodo['lapso'] = (($periodo['lapso'] % 100)==15)?$periodo['lapso']+10:$periodo['lapso']+90;
     $futuro[$i]['materias'] = array();
-    pg_query("insert into lapsos values($periodo[lapso])");
+    pg_query("insert into lapsos values($periodo[lapso],0)");
     $j=0;
     while($tupla=pg_fetch_assoc($materias)){
         if($tupla['creditos_materia']<=$creditos_disponibles){
