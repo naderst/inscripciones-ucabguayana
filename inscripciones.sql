@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.2
 -- Dumped by pg_dump version 9.3.2
--- Started on 2014-01-18 21:25:30 VET
+-- Started on 2014-01-20 19:58:20 VET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -22,7 +22,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2067 (class 0 OID 0)
+-- TOC entry 2071 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -31,6 +31,51 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 197 (class 1255 OID 18182)
+-- Name: tf_notificar_prematricula(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION tf_notificar_prematricula() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+	DECLARE alumno RECORD;
+	BEGIN
+		FOR alumno IN SELECT id_alumno FROM alumnos LOOP
+			INSERT INTO notificaciones(id_alumno,mensaje) VALUES(alumno.id_alumno, 'Prematricula');
+		END LOOP;
+		RETURN NEW;
+	END;
+$$;
+
+
+ALTER FUNCTION public.tf_notificar_prematricula() OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1255 OID 18191)
+-- Name: tf_notificar_salon(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION tf_notificar_salon() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+	DECLARE alumno RECORD;
+	BEGIN
+		FOR alumno IN SELECT a.id_alumno, s.id_salon, s.id_materia, s.dia, s.hora_inicio, s.hora_fin FROM materias_x_salon s,materias_x_alumnos a
+			WHERE a.id_materia = s.id_materia AND
+				a.seccion = NEW.seccion AND
+				s.id_materia = NEW.id_materia AND
+				s.id_salon = NEW.id_salon AND
+				s.dia = NEW.dia LOOP
+			INSERT INTO notificaciones(id_alumno,mensaje) VALUES(alumno.id_alumno, CONCAT('Salon;',alumno.id_salon,';',alumno.id_materia,';',alumno.dia,';',alumno.hora_inicio,';',alumno.hora_fin));
+		END LOOP;
+		RETURN NEW;
+	END;
+$$;
+
+
+ALTER FUNCTION public.tf_notificar_salon() OWNER TO postgres;
 
 SET default_tablespace = '';
 
@@ -248,7 +293,7 @@ CREATE TABLE salones (
 ALTER TABLE public.salones OWNER TO postgres;
 
 --
--- TOC entry 2046 (class 0 OID 17601)
+-- TOC entry 2050 (class 0 OID 17601)
 -- Dependencies: 170
 -- Data for Name: alumnos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -258,7 +303,7 @@ INSERT INTO alumnos (id_alumno, nombre_alumno, apellido_alumno, carrera_alumno, 
 
 
 --
--- TOC entry 2047 (class 0 OID 17609)
+-- TOC entry 2051 (class 0 OID 17609)
 -- Dependencies: 171
 -- Data for Name: alumnos_x_holds; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -266,7 +311,7 @@ INSERT INTO alumnos (id_alumno, nombre_alumno, apellido_alumno, carrera_alumno, 
 
 
 --
--- TOC entry 2048 (class 0 OID 17612)
+-- TOC entry 2052 (class 0 OID 17612)
 -- Dependencies: 172
 -- Data for Name: cuentas_x_profesores; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -275,7 +320,7 @@ INSERT INTO cuentas_x_profesores (id_profesor, clave) VALUES (7, '4297f44b139552
 
 
 --
--- TOC entry 2049 (class 0 OID 17618)
+-- TOC entry 2053 (class 0 OID 17618)
 -- Dependencies: 173
 -- Data for Name: holds; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -285,7 +330,7 @@ INSERT INTO holds (id_hold, nombre_hold, descripcion_hold) VALUES (2, 'Papeles',
 
 
 --
--- TOC entry 2050 (class 0 OID 17621)
+-- TOC entry 2054 (class 0 OID 17621)
 -- Dependencies: 174
 -- Data for Name: lapsos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -297,10 +342,11 @@ INSERT INTO lapsos (lapso) VALUES (201222);
 INSERT INTO lapsos (lapso) VALUES (201221);
 INSERT INTO lapsos (lapso) VALUES (201122);
 INSERT INTO lapsos (lapso) VALUES (201121);
+INSERT INTO lapsos (lapso) VALUES (201522);
 
 
 --
--- TOC entry 2051 (class 0 OID 17624)
+-- TOC entry 2055 (class 0 OID 17624)
 -- Dependencies: 175
 -- Data for Name: materias; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -359,7 +405,7 @@ INSERT INTO materias (id_materia, creditos_materia, nombre_materia, tipo_materia
 
 
 --
--- TOC entry 2052 (class 0 OID 17631)
+-- TOC entry 2056 (class 0 OID 17631)
 -- Dependencies: 176
 -- Data for Name: materias_x_alumnos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -406,7 +452,7 @@ INSERT INTO materias_x_alumnos (id_materia, id_alumno, lapso, nota, seccion) VAL
 
 
 --
--- TOC entry 2053 (class 0 OID 17638)
+-- TOC entry 2057 (class 0 OID 17638)
 -- Dependencies: 177
 -- Data for Name: materias_x_profesores; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -453,7 +499,7 @@ INSERT INTO materias_x_profesores (id_materia, id_profesor, lapso, seccion) VALU
 
 
 --
--- TOC entry 2054 (class 0 OID 17642)
+-- TOC entry 2058 (class 0 OID 17642)
 -- Dependencies: 178
 -- Data for Name: materias_x_salon; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -470,10 +516,11 @@ INSERT INTO materias_x_salon (id_materia, id_salon, hora_inicio, lapso, seccion,
 INSERT INTO materias_x_salon (id_materia, id_salon, hora_inicio, lapso, seccion, dia, hora_fin) VALUES (8402, 'A2-11', '6:00 p.m.', 201421, 401, 'm', '9:00 p.m.');
 INSERT INTO materias_x_salon (id_materia, id_salon, hora_inicio, lapso, seccion, dia, hora_fin) VALUES (8402, 'LAB-BD', '2:00 p.m.', 201421, 401, 'i', '4:00 p.m.');
 INSERT INTO materias_x_salon (id_materia, id_salon, hora_inicio, lapso, seccion, dia, hora_fin) VALUES (8406, 'LAB-BD', '9:00 a.m.', 201421, 401, 'm', '12:00 p.m.');
+INSERT INTO materias_x_salon (id_materia, id_salon, hora_inicio, lapso, seccion, dia, hora_fin) VALUES (8406, 'A2-11', '9:00 a.m.', 201421, 401, 's', '11:00 a.m.');
 
 
 --
--- TOC entry 2055 (class 0 OID 17649)
+-- TOC entry 2059 (class 0 OID 17649)
 -- Dependencies: 179
 -- Data for Name: notificaciones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -481,7 +528,7 @@ INSERT INTO materias_x_salon (id_materia, id_salon, hora_inicio, lapso, seccion,
 
 
 --
--- TOC entry 2056 (class 0 OID 17652)
+-- TOC entry 2060 (class 0 OID 17652)
 -- Dependencies: 180
 -- Data for Name: prelaciones_materias; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -546,7 +593,7 @@ INSERT INTO prelaciones_materias (id_materia_preladora, id_materia_prelada) VALU
 
 
 --
--- TOC entry 2057 (class 0 OID 17655)
+-- TOC entry 2061 (class 0 OID 17655)
 -- Dependencies: 181
 -- Data for Name: prelaciones_numericas; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -558,7 +605,7 @@ INSERT INTO prelaciones_numericas (id_materia_prelada, creditos_prelacion) VALUE
 
 
 --
--- TOC entry 2058 (class 0 OID 17659)
+-- TOC entry 2062 (class 0 OID 17659)
 -- Dependencies: 182
 -- Data for Name: profesores; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -597,7 +644,7 @@ INSERT INTO profesores (id_profesor, nombre_profesor, apellido_profesor) VALUES 
 
 
 --
--- TOC entry 2059 (class 0 OID 17663)
+-- TOC entry 2063 (class 0 OID 17663)
 -- Dependencies: 183
 -- Data for Name: salones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -610,7 +657,7 @@ INSERT INTO salones (id_salon, capacidad_salon, ubicacion_salon) VALUES ('AR-24'
 
 
 --
--- TOC entry 1898 (class 2606 OID 17669)
+-- TOC entry 1900 (class 2606 OID 17669)
 -- Name: alumnos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -619,7 +666,7 @@ ALTER TABLE ONLY alumnos
 
 
 --
--- TOC entry 1900 (class 2606 OID 17671)
+-- TOC entry 1902 (class 2606 OID 17671)
 -- Name: alumnos_x_holds_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -628,7 +675,7 @@ ALTER TABLE ONLY alumnos_x_holds
 
 
 --
--- TOC entry 1902 (class 2606 OID 17673)
+-- TOC entry 1904 (class 2606 OID 17673)
 -- Name: cuentas_x_profesores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -637,7 +684,7 @@ ALTER TABLE ONLY cuentas_x_profesores
 
 
 --
--- TOC entry 1904 (class 2606 OID 17675)
+-- TOC entry 1906 (class 2606 OID 17675)
 -- Name: holds_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -646,7 +693,7 @@ ALTER TABLE ONLY holds
 
 
 --
--- TOC entry 1906 (class 2606 OID 17677)
+-- TOC entry 1908 (class 2606 OID 17677)
 -- Name: lapsos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -655,7 +702,7 @@ ALTER TABLE ONLY lapsos
 
 
 --
--- TOC entry 1908 (class 2606 OID 17679)
+-- TOC entry 1910 (class 2606 OID 17679)
 -- Name: materias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -664,7 +711,7 @@ ALTER TABLE ONLY materias
 
 
 --
--- TOC entry 1910 (class 2606 OID 17681)
+-- TOC entry 1912 (class 2606 OID 17681)
 -- Name: materias_x_alumnos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -673,7 +720,7 @@ ALTER TABLE ONLY materias_x_alumnos
 
 
 --
--- TOC entry 1912 (class 2606 OID 17683)
+-- TOC entry 1914 (class 2606 OID 17683)
 -- Name: materias_x_profesores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -682,7 +729,7 @@ ALTER TABLE ONLY materias_x_profesores
 
 
 --
--- TOC entry 1914 (class 2606 OID 17685)
+-- TOC entry 1916 (class 2606 OID 17685)
 -- Name: materias_x_salon_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -691,7 +738,7 @@ ALTER TABLE ONLY materias_x_salon
 
 
 --
--- TOC entry 1916 (class 2606 OID 17687)
+-- TOC entry 1918 (class 2606 OID 17687)
 -- Name: notificaciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -700,7 +747,7 @@ ALTER TABLE ONLY notificaciones
 
 
 --
--- TOC entry 1918 (class 2606 OID 17689)
+-- TOC entry 1920 (class 2606 OID 17689)
 -- Name: prelaciones_materias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -709,7 +756,7 @@ ALTER TABLE ONLY prelaciones_materias
 
 
 --
--- TOC entry 1920 (class 2606 OID 17691)
+-- TOC entry 1922 (class 2606 OID 17691)
 -- Name: prelaciones_numericas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -718,7 +765,7 @@ ALTER TABLE ONLY prelaciones_numericas
 
 
 --
--- TOC entry 1922 (class 2606 OID 17693)
+-- TOC entry 1924 (class 2606 OID 17693)
 -- Name: profesores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -727,7 +774,7 @@ ALTER TABLE ONLY profesores
 
 
 --
--- TOC entry 1924 (class 2606 OID 17695)
+-- TOC entry 1926 (class 2606 OID 17695)
 -- Name: salones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -736,7 +783,23 @@ ALTER TABLE ONLY salones
 
 
 --
--- TOC entry 1925 (class 2606 OID 17696)
+-- TOC entry 1941 (class 2620 OID 18183)
+-- Name: notificar_prematricula; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER notificar_prematricula AFTER INSERT ON lapsos FOR EACH STATEMENT EXECUTE PROCEDURE tf_notificar_prematricula();
+
+
+--
+-- TOC entry 1942 (class 2620 OID 18192)
+-- Name: notificar_salon; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER notificar_salon AFTER INSERT ON materias_x_salon FOR EACH ROW EXECUTE PROCEDURE tf_notificar_salon();
+
+
+--
+-- TOC entry 1927 (class 2606 OID 17696)
 -- Name: cuentas_x_profesores_id_profesor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -745,7 +808,7 @@ ALTER TABLE ONLY cuentas_x_profesores
 
 
 --
--- TOC entry 1926 (class 2606 OID 17701)
+-- TOC entry 1928 (class 2606 OID 17701)
 -- Name: lapso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -754,7 +817,7 @@ ALTER TABLE ONLY materias_x_alumnos
 
 
 --
--- TOC entry 1929 (class 2606 OID 17706)
+-- TOC entry 1931 (class 2606 OID 17706)
 -- Name: lapso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -763,7 +826,7 @@ ALTER TABLE ONLY materias_x_profesores
 
 
 --
--- TOC entry 1932 (class 2606 OID 17711)
+-- TOC entry 1934 (class 2606 OID 17711)
 -- Name: lapso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -772,7 +835,7 @@ ALTER TABLE ONLY materias_x_salon
 
 
 --
--- TOC entry 1927 (class 2606 OID 17716)
+-- TOC entry 1929 (class 2606 OID 17716)
 -- Name: materias_x_alumnos_id_alumno_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -781,7 +844,7 @@ ALTER TABLE ONLY materias_x_alumnos
 
 
 --
--- TOC entry 1928 (class 2606 OID 17721)
+-- TOC entry 1930 (class 2606 OID 17721)
 -- Name: materias_x_alumnos_id_materia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -790,7 +853,7 @@ ALTER TABLE ONLY materias_x_alumnos
 
 
 --
--- TOC entry 1930 (class 2606 OID 17726)
+-- TOC entry 1932 (class 2606 OID 17726)
 -- Name: materias_x_profesores_id_materia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -799,7 +862,7 @@ ALTER TABLE ONLY materias_x_profesores
 
 
 --
--- TOC entry 1931 (class 2606 OID 17731)
+-- TOC entry 1933 (class 2606 OID 17731)
 -- Name: materias_x_profesores_id_profesor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -808,7 +871,7 @@ ALTER TABLE ONLY materias_x_profesores
 
 
 --
--- TOC entry 1933 (class 2606 OID 17736)
+-- TOC entry 1935 (class 2606 OID 17736)
 -- Name: materias_x_salon_id_materia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -817,7 +880,7 @@ ALTER TABLE ONLY materias_x_salon
 
 
 --
--- TOC entry 1934 (class 2606 OID 17741)
+-- TOC entry 1936 (class 2606 OID 17741)
 -- Name: materias_x_salon_id_salon_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -826,7 +889,7 @@ ALTER TABLE ONLY materias_x_salon
 
 
 --
--- TOC entry 1935 (class 2606 OID 17746)
+-- TOC entry 1937 (class 2606 OID 17746)
 -- Name: notificaciones_id_alumno_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -835,7 +898,7 @@ ALTER TABLE ONLY notificaciones
 
 
 --
--- TOC entry 1936 (class 2606 OID 17751)
+-- TOC entry 1938 (class 2606 OID 17751)
 -- Name: prelaciones_materias_id_materia_prelada_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -844,7 +907,7 @@ ALTER TABLE ONLY prelaciones_materias
 
 
 --
--- TOC entry 1937 (class 2606 OID 17756)
+-- TOC entry 1939 (class 2606 OID 17756)
 -- Name: prelaciones_materias_id_materia_preladora_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -853,7 +916,7 @@ ALTER TABLE ONLY prelaciones_materias
 
 
 --
--- TOC entry 1938 (class 2606 OID 17761)
+-- TOC entry 1940 (class 2606 OID 17761)
 -- Name: prelaciones_numericas_id_materia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -862,7 +925,7 @@ ALTER TABLE ONLY prelaciones_numericas
 
 
 --
--- TOC entry 2066 (class 0 OID 0)
+-- TOC entry 2070 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -873,7 +936,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-01-18 21:25:30 VET
+-- Completed on 2014-01-20 19:58:20 VET
 
 --
 -- PostgreSQL database dump complete
