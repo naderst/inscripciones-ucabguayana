@@ -1,7 +1,9 @@
 RewriteEngine on
 
-RewriteRule ^(js|json|img|css|fonts|pdf)(/.*)?$ - [L]
+RewriteRule ^(js|json|img|css|fonts)(/.*)?$ - [L]
 RewriteRule ^cronjobs(/.*)?$ - [L,F]
+RewriteRule ^pdf/(.+)\.pdf$ pdf/$1.php
+RewriteRule ^pdf/?$ - [F]
 RewriteRule ^$ index.php?controller=prematricula&action=index
 RewriteRule ^([a-z0-9-]+)/([a-z0-9-]+)/([a-z0-9-/]+)/?$ index.php?controller=$1&action=$2&params=$3
 RewriteRule ^([a-z0-9-]+)/([a-z0-9-]+)/?$ index.php?controller=$1&action=$2

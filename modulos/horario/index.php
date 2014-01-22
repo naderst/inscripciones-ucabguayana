@@ -22,7 +22,7 @@
 		</div>
 		<br>
 		<center>
-			<a href="<?php echo $app['basedir'].'/pdf/horario.php'; ?>" target="_blank">Ver horario en PDF</a>
+			<a href="<?php echo $app['basedir'].'/pdf/horario.pdf'; ?>" target="_blank">Ver horario en PDF</a>
 		</center>
 	</div>
 </article>
