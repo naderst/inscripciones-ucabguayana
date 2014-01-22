@@ -13,8 +13,14 @@ function cargarPrematriculaFija() {
 
 function inflarPrematriculaFija(prematricula) {
     var colores = ['materia1', 'materia2', 'materia3', 'materia4', 'materia5', 'materia6', 'materia7', 'materia8', 'materia9', 'materia10'];
+    var html = '';
 
-    cargarHorario(colores);
+    for (var i in prematricula.materias)
+        html += '<li id="' + colores[i] + '">' + prematricula.materias[i] + '<br><span></span</li>';
+    
+    $('.prematricula').append(html);
+    
+    cargarHorario();
 
     $('.prematricula').show();
     $('.prematricula').after('<p class="info"><i class="fa fa-info"></i>Estás cursando ' +
@@ -22,7 +28,7 @@ function inflarPrematriculaFija(prematricula) {
     $('#lapso').html(prematricula.lapso);
 }
 
-function cargarHorario(colores) {
+function cargarHorario() {
     $.ajax({
         async: false,
         url: basedir + '/json/horario.php',
@@ -31,17 +37,18 @@ function cargarHorario(colores) {
         },
         success: function (json) {
             var horario = JSON.parse(json);
-            var html = '';
-            
-            for (var i in horario) {
-                html += '<li id="' + colores[i] + '">' + horario[i].materia + '<br><span>Profesor: ' + horario[i].profesor + '<br>';
-                for (var j in horario[i].dias) {
-                    k = horario[i].dias.length - j - 1;
-                    html += horario[i].dias[k].dia + ' ' + horario[i].dias[k].hora_inicio + ' - ' + horario[i].dias[k].hora_fin + '<br> Salón: ' + horario[i].dias[k].salon + '<br>';
+
+            $('.prematricula li').each(function () {
+                var indice;
+                for (var i in horario)
+                    if (horario[i].materia == $(this).text())
+                        indice = i;
+                $(this).find('span').append('Profesor: ' + horario[indice].profesor + '<br>');
+                for (var j in horario[indice].dias) {
+                    k = horario[indice].dias.length - j - 1;
+                    $(this).find('span').append(horario[indice].dias[k].dia + ' ' + horario[indice].dias[k].hora_inicio + ' - ' + horario[indice].dias[k].hora_fin + '<br> Salón: ' + horario[indice].dias[k].salon + '<br>');
                 }
-                html += '</span></li>';
-            }
-            $('.prematricula').append(html);
+            });
         }
     });
 }

@@ -20,6 +20,7 @@
     text-align: center;
 }
 .prematricula li span {
+    color: #FFF;
     display: none;
     width: 100%;
 }
