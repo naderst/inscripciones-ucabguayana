@@ -17,9 +17,9 @@ function inflarPrematriculaFija(prematricula) {
 
     for (var i in prematricula.materias)
         html += '<li id="' + colores[i] + '">' + prematricula.materias[i] + '<br><span></span</li>';
-    
+
     $('.prematricula').append(html);
-    
+
     cargarHorario();
 
     $('.prematricula').show();
@@ -37,17 +37,22 @@ function cargarHorario() {
         },
         success: function (json) {
             var horario = JSON.parse(json);
+            var dia = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
             $('.prematricula li').each(function () {
                 var indice;
+                var k;
+                var hdia;
+
                 for (var i in horario)
                     if (horario[i].materia == $(this).text())
                         indice = i;
                 $(this).find('span').append('Profesor: ' + horario[indice].profesor + '<br>');
-                for (var j in horario[indice].dias) {
-                    k = horario[indice].dias.length - j - 1;
-                    $(this).find('span').append(horario[indice].dias[k].dia + ' ' + horario[indice].dias[k].hora_inicio + ' - ' + horario[indice].dias[k].hora_fin + '<br> Salón: ' + horario[indice].dias[k].salon + '<br>');
-                }
+                for (var j in dia)
+                    for (var k in horario[indice].dias) {
+                        if (dia[j] == horario[indice].dias[k].dia)
+                            $(this).find('span').append(horario[indice].dias[k].dia + ' ' + horario[indice].dias[k].hora_inicio + ' - ' + horario[indice].dias[k].hora_fin + '<br> Salón: ' + horario[indice].dias[k].salon + '<br>');
+                    }
             });
         }
     });
@@ -83,7 +88,7 @@ $(document).ready(function () {
     $('#status').hide();
     cargarPrematriculaFija();
     cargarFuturosSemestres();
-    
+
     $('.prematricula li').click(function () {
         $(this).find('span').slideToggle();
     });
