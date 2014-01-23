@@ -1,11 +1,4 @@
 /* Horario */
-a {
-    color: #14B4F0;
-    text-decoration: none;
-}
-a:hover {
-    color: #000;
-}
 .horario {
     display: none !important
 }
@@ -48,6 +41,21 @@ a:hover {
 }
 .horario .m10, .horario-small .m10 {
     background-color: #FF8533
+}
+.contenedor-titulo h1 {
+    height: 20px;
+    float: left;
+}
+.contenedor-titulo a {
+    color: #14B4F0;
+    text-decoration: none;
+    font-size: 14px;
+    height: 20px;
+    margin-top: 10px;
+    float: right;
+}
+.contenedor-titulo a:hover {
+    color: #000;
 }
 @media only screen and (min-width: 480px) {
     .horario-small {

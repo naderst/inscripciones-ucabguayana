@@ -1,6 +1,10 @@
 <section class="separador">
     <div class="contenedor">
-        <h1 class="titulo">Horario</h1>
+    	<div class="contenedor-titulo">
+        	<h1 class="titulo">Horario</h1>
+        	<a href="<?php echo $app['basedir'].'/pdf/horario.pdf'; ?>" target="_blank"><i class="fa fa-download"></i> Descargar en PDF</a>
+        	<div class="fix"></div>
+    	</div>
     </div>
 </section>
 <article class="contenido">
@@ -20,9 +24,5 @@
 			<table border="0" width="100%" cellspacing="0" cellpadding="0">
 			</table>
 		</div>
-		<br>
-		<center>
-			<a href="<?php echo $app['basedir'].'/pdf/horario.pdf'; ?>" target="_blank">Ver horario en PDF</a>
-		</center>
 	</div>
 </article>
