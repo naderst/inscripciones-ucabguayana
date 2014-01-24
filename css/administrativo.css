@@ -8,7 +8,6 @@
 */
 
 .administrativo {
-    display: none;
     width: 100%;
 }
 .administrativo .lista,
@@ -82,7 +81,7 @@ h6 {
     cursor: pointer;
 }
 .espacio td {
-     padding:10px 0;   
+    padding: 10px 0;
 }
 .informacion {
     margin: 8px auto;
@@ -137,6 +136,9 @@ h6 {
     color: #12B6EB;
     cursor: pointer;
 }
+#escritorio {
+    display: none;
+}
 #general {
     display: block;
 }
@@ -150,8 +152,8 @@ h6 {
         padding: 10px 40px;
     }
 }
-@media only screen and (min-width: 860px) {
-    .administrativo {
+@media only screen and (min-width: 785px) {
+    #escritorio {
         display: block;
     }
     #general {

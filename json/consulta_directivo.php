@@ -49,11 +49,13 @@ if($_POST['semestre']!=""){
                 on(al.id_alumno = materias_x_alumnos.id_alumno 
                     and (materias_x_alumnos.nota='ap' or ( materias_x_alumnos.nota<>'rp' and materias_x_alumnos.nota::int>=10))))
             )";
-    $consulta = "select mna.id_alumno,mna.nombre_alumno,mna.apellido_alumno,min(materias.semestre)
-                from $mna as mna inner join materias 
-                    on (mna.id_materia = materias.id_materia)
-                group by mna.id_alumno,mna.nombre_alumno,mna.apellido_alumno
-                having min(materias.semestre) = $_POST[semestre]";
+    $consulta = "SELECT mna.id_alumno,mna.nombre_alumno,mna.apellido_alumno,m.semestre
+                 FROM $mna AS mna, materias AS m, materias_x_alumnos AS a
+                 WHERE a.id_alumno = mna.id_alumno
+                 AND m.id_materia = a.id_materia
+                 AND mna.id_materia = m.id_materia
+                 AND m.semestre = $_POST[semestre]
+                 GROUP BY mna.id_alumno,mna.nombre_alumno,mna.apellido_alumno,m.semestre";
 }
 $aux = pg_query($consulta);
 $respuesta = array();

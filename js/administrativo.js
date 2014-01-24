@@ -31,6 +31,7 @@ function cargarDatos() {
     });
 }
 
+//Muestra la tabla con los resultados de la búsqueda de estudiantes
 function mostrarEstudiantes(estudiantes) {
     if (estudiantes.length > 0) {
         var abc = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -39,16 +40,16 @@ function mostrarEstudiantes(estudiantes) {
         var barra_letras = '<tr>';
         var html = '<thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th></tr></thead><tbody>';
 
-        if ($('.resultados').is(':checked'))
+        if ($('.administrativo .resultados').is(':checked'))
             for (var i in abc) {
                 barra_letras += '<td><a href="#' + abc[i] + '">' + abc[i] + '</a></td>';
                 lista_letras += '<option value="' + abc[i] + '">' + abc[i] + '</option>';
-                html += '<tr style="border-bottom: 2px solid #FFD100"><td id="' + abc[i] + '" colspan="3">' + abc[i] + '</td></tr>'
                 var j;
+                var temp = '';
                 for (j = 0; j < estudiantes.length && abc[i] == estudiantes[j].apellido.charAt(0); j++)
-                    html += '<tr><td>' + estudiantes[j].apellido + '</td><td>' + estudiantes[j].nombre + '</td><td>' + estudiantes[j].cedula + '</td></tr>';
-                if (j == 0)
-                    html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
+                    temp += '<tr><td>' + estudiantes[j].apellido + '</td><td>' + estudiantes[j].nombre + '</td><td>' + estudiantes[j].cedula + '</td></tr>';
+                if (j != 0)
+                    html += '<tr style="border-bottom: 2px solid #FFD100"><td id="' + abc[i] + '" colspan="3">' + abc[i] + '</td></tr>' + temp;
             } else {
                 barra_letras += '<td id="A" style="color: #12B6EB">A</td>';
                 lista_letras += '<option value="A">A</option>';
@@ -71,21 +72,27 @@ function mostrarEstudiantes(estudiantes) {
         $('.letras').html(barra_letras).show();
         $('.lista-letras').html(lista_letras).show();
         $('.estudiantes').html(html).show();
-    } else
+    } else {
+        $('.letras').html('').hide();
+        $('.lista-letras').html('').hide();
+        $('.estudiantes').html('').hide();
         $('.informacion').html('<p align="center">No se encontraron resultados</p>').show();
+    }
 }
 
+//Consulta y muestra información de los estudiantes cuyo apellido empiece por la letra marcada en la barra de letras
 function barraLetras(letra) {
     $.ajax({
         async: false,
         url: basedir + '/json/consulta_directivo.php',
         type: 'POST',
         data: {
-            profesor: $('.profesor').val() != '' ? $('.profesor').val() : '',
-            periodo: $('.periodo').val() != '' ? $('.periodo').val() : '',
-            asignatura: $('.materia').val() != '' ? $('.materia').val() : '',
-            creditos: $('.creditos').val() != '' ? $('.creditos').val() : '',
-            flag: $('.creditos').val() != '' ? $('.flag').val() : '',
+            profesor: $('.administrativo .profesor').val() != '' ? $('.administrativo .profesor').val() : '',
+            periodo: $('.administrativo .periodo').val() != '' ? $('.administrativo .periodo').val() : '',
+            asignatura: $('.administrativo .materia').val() != '' ? $('.administrativo .materia').val() : '',
+            semestre: $('.administrativo .semestre').val() != '' ? $('.administrativo .semestre').val() : '',
+            creditos: $('.administrativo .creditos').val() != '' ? $('.administrativo .creditos').val() : '',
+            flag: $('.administrativo .creditos').val() != '' ? $('.administrativo .flag').val() : '',
             letra: letra.toLowerCase()
         },
         error: function () {
@@ -96,12 +103,7 @@ function barraLetras(letra) {
             var html = '<thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th></tr></thead><tbody>';
             var i;
 
-            $('#' + letra).css('color', '#12B6EB');
-
-            $('.letras td').each(function () {
-                if ($(this).css('color') != '#000' && $(this).attr('id') != letra)
-                    $(this).css('color', '#000');
-            });
+            marcarLetra(letra);
 
             for (i = 0; i < estudiantes.length; i++)
                 html += '<tr><td>' + estudiantes[i].apellido + '</td><td>' + estudiantes[i].nombre + '</td><td>' + estudiantes[i].cedula + '</td></tr>';
@@ -115,17 +117,28 @@ function barraLetras(letra) {
     });
 }
 
+function marcarLetra(letra) {
+    $('#' + letra).css('color', '#12B6EB');
+
+    $('.letras td').each(function () {
+        if ($(this).css('color') != '#000' && $(this).attr('id') != letra)
+            $(this).css('color', '#000');
+    });
+}
+
+//Consulta y muestra información de los estudiantes cuyo apellido empiece por la letra seleccionada en el combobox de letras
 function comboboxLetras(letra) {
     $.ajax({
         async: false,
         url: basedir + '/json/consulta_directivo.php',
         type: 'POST',
         data: {
-            profesor: $('.profesor').val() != '' ? $('.profesor').val() : '',
-            periodo: $('.periodo').val() != '' ? $('.periodo').val() : '',
-            asignatura: $('.materia').val() != '' ? $('.materia').val() : '',
-            creditos: $('.creditos').val() != '' ? $('.creditos').val() : '',
-            flag: $('.creditos').val() != '' ? $('.flag').val() : '',
+            profesor: $('.administrativo .profesor').val() != '' ? $('.administrativo .profesor').val() : '',
+            periodo: $('.administrativo .periodo').val() != '' ? $('.administrativo .periodo').val() : '',
+            asignatura: $('.administrativo .materia').val() != '' ? $('.administrativo .materia').val() : '',
+            semestre: $('.administrativo .semestre').val() != '' ? $('.administrativo .semestre').val() : '',
+            creditos: $('.administrativo .creditos').val() != '' ? $('.administrativo .creditos').val() : '',
+            flag: $('.administrativo .creditos').val() != '' ? $('.administrativo .flag').val() : '',
             letra: letra.toLowerCase()
         },
         error: function () {
@@ -154,11 +167,14 @@ $(document).ready(function () {
     $('.lista-letras').hide();
     $('.estudiantes').hide();
     $('#status').hide();
+    var flag = window.innerWidth >= 785 ? false : true;
+    var flagLetra = window.innerWidth >= 904 ? false : true;
+    var letter = '';
 
     cargarDatos();
 
-    //Consulta del usuario a la base de datos
-    $(document).on('click', '.buscar', function () {
+    //Consulta del usuario a la base de datos sobre estudiantes que cumplan ciertos parámetros o en dado caso de no marcar parámetros se muestran toda la lista de estudiantes almacenados
+    $(document).on('click', '.administrativo .buscar', function () {
         $('.informacion').hide();
         $('.letras').hide();
         $('.lista-letras').hide();
@@ -169,11 +185,12 @@ $(document).ready(function () {
             url: basedir + '/json/consulta_directivo.php',
             type: 'POST',
             data: {
-                profesor: $('.profesor').val() != '' ? $('.profesor').val() : '',
-                periodo: $('.periodo').val() != '' ? $('.periodo').val() : '',
-                asignatura: $('.materia').val() != '' ? $('.materia').val() : '',
-                creditos: $('.creditos').val() != '' ? $('.creditos').val() : '',
-                flag: $('.creditos').val() != '' ? $('.flag').val() : '',
+                profesor: $('.administrativo .profesor').val() != '' ? $('.administrativo .profesor').val() : '',
+                periodo: $('.administrativo .periodo').val() != '' ? $('.administrativo .periodo').val() : '',
+                asignatura: $('.administrativo .materia').val() != '' ? $('.administrativo .materia').val() : '',
+                semestre: $('.administrativo .semestre').val() != '' ? $('.administrativo .semestre').val() : '',
+                creditos: $('.administrativo .creditos').val() != '' ? $('.administrativo .creditos').val() : '',
+                flag: $('.administrativo .creditos').val() != '' ? $('.administrativo .flag').val() : '',
                 letra: ''
             },
             error: function () {
@@ -185,17 +202,69 @@ $(document).ready(function () {
         });
     });
 
+    //Verificación del tamaño de la ventana para esconder o no el diseño de la pág. de acuerdo a los media query (estilo responsive)
+    $(window).resize(function () {
+        if (window.innerWidth >= 785) {
+            $('#general').removeClass();
+            $('#escritorio').addClass('administrativo');
+            if (flag) {
+                $('#escritorio .profesor').val($('#general .profesor').val());
+                $('#escritorio .periodo').val($('#general .periodo').val());
+                $('#escritorio .materia').val($('#general .materia').val());
+                $('#escritorio .semestre').val($('#general .semestre').val());
+                $('#escritorio .creditos').val($('#general .creditos').val());
+                $('#escritorio .flag').val($('#general .flag').val());
+                if ($('#general .resultados').is(':checked'))
+                    $('#escritorio .resultados').attr('checked', true);
+                else
+                    $('#escritorio .resultados').attr('checked', false);
+                flag = false;
+            }
+        } else {
+            if (!flag) {
+                $('#escritorio').removeClass();
+                $('#general').addClass('administrativo');
+                $('#general .profesor').val($('#escritorio .profesor').val());
+                $('#general .periodo').val($('#escritorio .periodo').val());
+                $('#general .materia').val($('#escritorio .materia').val());
+                $('#general .semestre').val($('#escritorio .semestre').val());
+                $('#general .creditos').val($('#escritorio .creditos').val());
+                $('#general .flag').val($('#escritorio .flag').val());
+                if ($('#escritorio .resultados').is(':checked'))
+                    $('#general .resultados').attr('checked', true);
+                else
+                    $('#general .resultados').attr('checked', false);
+                flag = true;
+            }
+        }
+
+        if (window.innerWidth >= 904) {
+            if (flagLetra) {
+                if (!$('#escritorio .resultados').is(':checked')) 
+                    marcarLetra($('.lista-letras #combo-letras').val());
+                flagLetra = false;
+            }
+        } else {
+            if (!flagLetra) {
+                if (!$('#escritorio .resultados').is(':checked')) {
+                    $('.lista-letras #combo-letras').val(letter);
+                }
+                flagLetra = true;
+            }
+        }
+    });
+
     //Validación del campo de créditos acumulados para que sea sólo numérico
-    $(document).on('keypress', '.creditos', function (evento) {
+    $(document).on('keypress', '.administrativo .creditos', function (evento) {
         var key;
-        
+
         if (window.event) // IE
             key = evento.keyCode;
         else if (evento.which) // Netscape/Firefox/Opera
             key = evento.which;
         if (key < 48 || key > 57)
             return false;
-        
+
         return true;
     });
 
@@ -216,32 +285,24 @@ $(document).ready(function () {
     });
 
     //Habilitar o deshabilitar condición de los créditos
-    $(document).on('change', '.creditos', function () {
-        if ($('.creditos').val() != '')
-            $('.flag').prop('disabled', false);
+    $(document).on('change', '.administrativo .creditos', function () {
+        if ($('.administrativo .creditos').val() != '')
+            $('.administrativo .flag').prop('disabled', false);
         else
-            $('.flag').prop('disabled', 'disabled');
-    });
-
-    //Habilitar condición de créditos
-    $(document).on('change', '#general .creditos', function () {
-        if ($('#general .creditos').val() != '')
-            $('.flag').prop('disabled', false);
-        else
-            $('.flag').prop('disabled', 'disabled');
+            $('.administrativo .flag').prop('disabled', 'disabled');
     });
 
     //Buscar resultados por letra con la barra de letras
     $(document).on('click', '.letras td', function () {
-        if (!$('.resultados').is(':checked')) {
+        if (!$('.administrativo .resultados').is(':checked')) {
             $('.estudiantes').hide();
-            barraLetras($(this).attr('id'));
+            barraLetras(letter = $(this).attr('id'));
         }
     });
 
     //Buscar resultados por letra con el combobox de letras
     $(document).on('change', '.lista-letras #combo-letras', function () {
-        if (!$('.resultados').is(':checked')) {
+        if (!$('.administrativo .resultados').is(':checked')) {
             $('.estudiantes').hide();
             comboboxLetras($(this).val());
         } else {
