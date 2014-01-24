@@ -40,7 +40,8 @@ function mostrarEstudiantes(estudiantes) {
         var barra_letras = '<tr>';
         var html = '<thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th></tr></thead><tbody>';
 
-        if ($('.administrativo .resultados').is(':checked'))
+        if ($('.administrativo .resultados').is(':checked')) {
+            checkbox = true;
             for (var i in abc) {
                 barra_letras += '<td><a href="#' + abc[i] + '">' + abc[i] + '</a></td>';
                 lista_letras += '<option value="' + abc[i] + '">' + abc[i] + '</option>';
@@ -50,19 +51,21 @@ function mostrarEstudiantes(estudiantes) {
                     temp += '<tr><td>' + estudiantes[j].apellido + '</td><td>' + estudiantes[j].nombre + '</td><td>' + estudiantes[j].cedula + '</td></tr>';
                 if (j != 0)
                     html += '<tr style="border-bottom: 2px solid #FFD100"><td id="' + abc[i] + '" colspan="3">' + abc[i] + '</td></tr>' + temp;
-            } else {
-                barra_letras += '<td id="A" style="color: #12B6EB">A</td>';
-                lista_letras += '<option value="A">A</option>';
-                var i;
-                for (i = 1; i < abc.length; i++) {
-                    barra_letras += '<td id="' + abc[i] + '">' + abc[i] + '</td>';
-                    lista_letras += '<option value="' + abc[i] + '">' + abc[i] + '</option>';
-                }
-                for (i = 0; i < estudiantes.length && abc[0] == estudiantes[i].apellido.charAt(0); i++)
-                    html += '<tr><td>' + estudiantes[i].apellido + '</td><td>' + estudiantes[i].nombre + '</td><td>' + estudiantes[i].cedula + '</td></tr>';
-                if (i == 0)
-                    html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
             }
+        } else {
+            checkbox = false;
+            barra_letras += '<td id="A" style="color: #12B6EB">A</td>';
+            lista_letras += '<option value="A">A</option>';
+            var i;
+            for (i = 1; i < abc.length; i++) {
+                barra_letras += '<td id="' + abc[i] + '">' + abc[i] + '</td>';
+                lista_letras += '<option value="' + abc[i] + '">' + abc[i] + '</option>';
+            }
+            for (i = 0; i < estudiantes.length && abc[0] == estudiantes[i].apellido.charAt(0); i++)
+                html += '<tr><td>' + estudiantes[i].apellido + '</td><td>' + estudiantes[i].nombre + '</td><td>' + estudiantes[i].cedula + '</td></tr>';
+            if (i == 0)
+                html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
+        }
 
         lista_letras += '</select>';
         barra_letras += '</tr>';
@@ -117,11 +120,11 @@ function barraLetras(letra) {
     });
 }
 
-function marcarLetra(letra) {
-    $('#' + letra).css('color', '#12B6EB');
+function marcarLetra(letter) {
+    $('#' + letter).css('color', '#12B6EB');
 
     $('.letras td').each(function () {
-        if ($(this).css('color') != '#000' && $(this).attr('id') != letra)
+        if ($(this).css('color') != '#000' && $(this).attr('id') != letter)
             $(this).css('color', '#000');
     });
 }
@@ -161,6 +164,8 @@ function comboboxLetras(letra) {
     });
 }
 
+var checkbox;
+
 $(document).ready(function () {
     $('.informacion').hide();
     $('.letras').hide();
@@ -169,7 +174,7 @@ $(document).ready(function () {
     $('#status').hide();
     var flag = window.innerWidth >= 785 ? false : true;
     var flagLetra = window.innerWidth >= 904 ? false : true;
-    var letter = '';
+    var letter = 'A';
 
     cargarDatos();
 
@@ -180,6 +185,7 @@ $(document).ready(function () {
         $('.lista-letras').hide();
         $('.estudiantes').hide();
         $('#status').hide();
+        letter = 'A';
         $.ajax({
             async: false,
             url: basedir + '/json/consulta_directivo.php',
@@ -240,13 +246,13 @@ $(document).ready(function () {
 
         if (window.innerWidth >= 904) {
             if (flagLetra) {
-                if (!$('#escritorio .resultados').is(':checked')) 
+                if (!checkbox)
                     marcarLetra($('.lista-letras #combo-letras').val());
                 flagLetra = false;
             }
         } else {
             if (!flagLetra) {
-                if (!$('#escritorio .resultados').is(':checked')) {
+                if (!checkbox) {
                     $('.lista-letras #combo-letras').val(letter);
                 }
                 flagLetra = true;
@@ -294,21 +300,41 @@ $(document).ready(function () {
 
     //Buscar resultados por letra con la barra de letras
     $(document).on('click', '.letras td', function () {
-        if (!$('.administrativo .resultados').is(':checked')) {
+        if (!checkbox) {
             $('.estudiantes').hide();
             barraLetras(letter = $(this).attr('id'));
+        } else {
+            var flag = false;
+            letter = $(this).val();
+
+            $('.estudiantes td[colspan=3]').each(function () {
+                if ($(this).attr('id') == letter)
+                    flag = true;
+            });
+            if (flag)
+                $('html, body').animate({
+                    scrollTop: $('#' + letter).offset().top
+                }, 1000);
         }
     });
 
     //Buscar resultados por letra con el combobox de letras
     $(document).on('change', '.lista-letras #combo-letras', function () {
-        if (!$('.administrativo .resultados').is(':checked')) {
+        if (!checkbox) {
             $('.estudiantes').hide();
-            comboboxLetras($(this).val());
+            comboboxLetras(letter = $(this).val());
         } else {
-            $('html, body').animate({
-                scrollTop: $('#' + letra).offset().top
-            }, 1000);
+            var flag = false;
+            letter = $(this).val();
+
+            $('.estudiantes td[colspan=3]').each(function () {
+                if ($(this).attr('id') == letter)
+                    flag = true;
+            });
+            if (flag)
+                $('html, body').animate({
+                    scrollTop: $('#' + letter).offset().top
+                }, 1000);
         }
     });
 });

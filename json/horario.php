@@ -12,8 +12,6 @@ function dias($d){
     }
 }
 
-
-
 session_start();
 if(!isset($_SESSION["usuario"])){
     header("Location: ".$app['basedir']."/autenticacion");  
@@ -51,5 +49,4 @@ while($tupla = pg_fetch_assoc($consulta)){
 }
 
 echo json_encode($horario);
-
 ?>
