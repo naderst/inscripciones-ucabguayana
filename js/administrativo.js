@@ -40,8 +40,12 @@ function mostrarEstudiantes(estudiantes) {
         var barra_letras = '<tr>';
         var html = '<thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th></tr></thead><tbody>';
 
+        $('#generalSubmit .enviar').removeAttr('disabled');
+        $('#escritorioSubmit .enviar').removeAttr('disabled');
+
         if ($('.administrativo .resultados').is(':checked')) {
-            checkbox = true;
+            $('#general .checkbox').val(checkbox = true);
+            $('#escritorio .checkbox').val(checkbox = true);
             for (var i in abc) {
                 barra_letras += '<td><a href="#' + abc[i] + '">' + abc[i] + '</a></td>';
                 lista_letras += '<option value="' + abc[i] + '">' + abc[i] + '</option>';
@@ -53,7 +57,8 @@ function mostrarEstudiantes(estudiantes) {
                     html += '<tr style="border-bottom: 2px solid #FFD100"><td id="' + abc[i] + '" colspan="3">' + abc[i] + '</td></tr>' + temp;
             }
         } else {
-            checkbox = false;
+            $('#general .checkbox').val(checkbox = false);
+            $('#escritorio .checkbox').val(checkbox = false);
             barra_letras += '<td id="A" style="color: #12B6EB">A</td>';
             lista_letras += '<option value="A">A</option>';
             var i;
@@ -63,8 +68,14 @@ function mostrarEstudiantes(estudiantes) {
             }
             for (i = 0; i < estudiantes.length && abc[0] == estudiantes[i].apellido.charAt(0); i++)
                 html += '<tr><td>' + estudiantes[i].apellido + '</td><td>' + estudiantes[i].nombre + '</td><td>' + estudiantes[i].cedula + '</td></tr>';
-            if (i == 0)
+            if (i == 0) {
                 html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
+                $('#generalSubmit .enviar').attr('disabled', 'disabled');
+                $('#escritorioSubmit .enviar').attr('disabled', 'disabled');
+            } else {
+                $('#generalSubmit .enviar').removeAttr('disabled');
+                $('#escritorioSubmit .enviar').removeAttr('disabled');
+            }
         }
 
         lista_letras += '</select>';
@@ -76,6 +87,8 @@ function mostrarEstudiantes(estudiantes) {
         $('.lista-letras').html(lista_letras).show();
         $('.estudiantes').html(html).show();
     } else {
+        $('#generalSubmit .enviar').attr('disabled', 'disabled');
+        $('#escritorioSubmit .enviar').attr('disabled', 'disabled');
         $('.letras').html('').hide();
         $('.lista-letras').html('').hide();
         $('.estudiantes').html('').hide();
@@ -110,8 +123,14 @@ function barraLetras(letra) {
 
             for (i = 0; i < estudiantes.length; i++)
                 html += '<tr><td>' + estudiantes[i].apellido + '</td><td>' + estudiantes[i].nombre + '</td><td>' + estudiantes[i].cedula + '</td></tr>';
-            if (i == 0)
+            if (i == 0) {
                 html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
+                $('#generalSubmit .enviar').attr('disabled', 'disabled');
+                $('#escritorioSubmit .enviar').attr('disabled', 'disabled');
+            } else {
+                $('#generalSubmit .enviar').removeAttr('disabled');
+                $('#escritorioSubmit .enviar').removeAttr('disabled');
+            }
 
             html += '</tbody>';
 
@@ -154,8 +173,14 @@ function comboboxLetras(letra) {
 
             for (i = 0; i < estudiantes.length; i++)
                 html += '<tr><td>' + estudiantes[i].apellido + '</td><td>' + estudiantes[i].nombre + '</td><td>' + estudiantes[i].cedula + '</td></tr>';
-            if (i == 0)
+            if (i == 0) {
                 html += '<tr><td colspan="3" style="border-bottom: none">No se encontraron resultados en esta letra</td></tr>';
+                $('#generalSubmit .enviar').attr('disabled', 'disabled');
+                $('#escritorioSubmit .enviar').attr('disabled', 'disabled');
+            } else {
+                $('#generalSubmit .enviar').removeAttr('disabled');
+                $('#escritorioSubmit .enviar').removeAttr('disabled');
+            }
 
             html += '</tbody>';
 
@@ -302,7 +327,9 @@ $(document).ready(function () {
     $(document).on('click', '.letras td', function () {
         if (!checkbox) {
             $('.estudiantes').hide();
-            barraLetras(letter = $(this).attr('id'));
+            $('#general .letter').val(letter = $(this).attr('id'));
+            $('#escritorio .letter').val(letter = $(this).attr('id'));
+            barraLetras(letter);
         } else {
             var flag = false;
             letter = $(this).val();
@@ -322,7 +349,9 @@ $(document).ready(function () {
     $(document).on('change', '.lista-letras #combo-letras', function () {
         if (!checkbox) {
             $('.estudiantes').hide();
-            comboboxLetras(letter = $(this).val());
+            $('#general .letter').val(letter = $(this).val());
+            $('#escritorio .letter').val(letter = $(this).val());
+            comboboxLetras(letter);
         } else {
             var flag = false;
             letter = $(this).val();

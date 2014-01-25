@@ -1,0 +1,45 @@
+@charset "utf-8";
+
+/*  Sistema administrativo - UCAB Guayana
+    Tema: Modulo de consultas para personal admiinistrativo
+    Tema URL: http://github.com/naderst/inscripciones-ucabguayana
+    Autores: https://github.com/naderst/inscripciones-ucabguayana/graphs/contributors
+    Version: 1.0
+*/
+
+.contenedor {
+    margin: 0px auto;
+    width: 100%;
+}
+.estudiantes {
+    border-collapse: collapse;
+    border: none;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    font-family: sans-serif;
+    margin: 0px auto;
+    margin-top: 20px;
+    width: 80%;
+}
+.estudiantes th {
+    background-color: #12B6EB;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: normal;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.estudiantes td {
+    border-bottom: 1px solid #12B6EB;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 18px;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+}
+.estudiantes th,
+.estudiantes td {
+    text-align: center;
+}
+#titulo {
+    font-family: sans-serif;
+    text-align: center;
+}

@@ -12,19 +12,19 @@
                 <tr>
                     <td>
                         <label>Profesor</label>
-                        <select class="lista profesor">
+                        <select class="lista profesor" name="profesor">
                             <option value="">Desplegar lista</option>
                         </select>
                     </td>
                     <td>
                         <label>Período</label>
-                        <select class="lista periodo">
+                        <select class="lista periodo" name="periodo">
                             <option value="">Desplegar lista</option>
                         </select>
                     </td>
                     <td>
                         <label>Materia</label>
-                        <select class="lista materia">
+                        <select class="lista materia" name="materia">
                             <option value="">Desplegar lista</option>
                         </select>
                     </td>
@@ -37,7 +37,7 @@
                 <tr>
                     <td>
                         <label>Semestre</label>
-                        <select class="lista semestre">
+                        <select class="lista semestre" name="semestre">
                             <option value="">Desplegar lista</option>
                             <option value="1">Primero</option>
                             <option value="2">Segundo</option>
@@ -53,11 +53,11 @@
                     </td>
                     <td>
                         <label>Créditos acumulados</label>
-                        <input class="lista creditos">
+                        <input class="lista creditos" name="creditos">
                     </td>
                     <td>
                         <label>Condición de los créditos</label>
-                        <select class="lista flag" disabled="disabled">
+                        <select class="lista flag" name="flag" disabled="disabled">
                             <option value="2">Menor</option>
                             <option value="0">Igual</option>
                             <option value="1">Mayor</option>
@@ -88,7 +88,10 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                            <i class="fa fa-download"></i><input type="submit" value="Descargar en PDF">
+                        <input class="checkbox" name="checkbox" type="text" value="" style="display:none !important;">
+                        <input class="letter" name="letter" type="text" value="" style="display:none !important;">
+                        <i class="fa fa-download"></i>
+                        <input class="enviar" name="enviar" disabled="disabled" type="submit" value="Descargar en PDF">
                     </td>
                 </tr>
             </table>
@@ -98,7 +101,7 @@
                 <tr>
                     <td>
                         <label>Profesor</label>
-                        <select class="lista profesor">
+                        <select class="lista profesor" name="profesor">
                             <option value="">Desplegar lista</option>
                         </select>
                     </td>
@@ -107,7 +110,7 @@
                     <td>
                         <br>
                         <label>Período</label>
-                        <select class="lista periodo">
+                        <select class="lista periodo" name="periodo">
                             <option value="">Desplegar lista</option>
                         </select>
                     </td>
@@ -116,7 +119,7 @@
                     <td>
                         <br>
                         <label>Materia</label>
-                        <select class="lista materia">
+                        <select class="lista materia" name="materia">
                             <option value="">Desplegar lista</option>
                         </select>
                     </td>
@@ -125,7 +128,7 @@
                     <td>
                         <br>
                         <label>Semestre</label>
-                        <select class="lista semestre">
+                        <select class="lista semestre" name="semestre">
                             <option value="">Desplegar lista</option>
                             <option value="1">Primero</option>
                             <option value="2">Segundo</option>
@@ -144,14 +147,14 @@
                     <td>
                         <br>
                         <label>Créditos acumulados</label>
-                        <input class="lista creditos">
+                        <input class="lista creditos" name="creditos">
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <br>
                         <label>Condición de los créditos</label>
-                        <select class="lista flag" disabled="disabled">
+                        <select class="lista flag" name="flag" disabled="disabled">
                             <option value="2">Menor</option>
                             <option value="0">Igual</option>
                             <option value="1">Mayor</option>
@@ -178,7 +181,10 @@
                 </tr>
                 <tr>
                     <td colspan="3">
-                            <i class="fa fa-download"></i><input type="submit" value="Descargar en PDF">
+                        <input class="checkbox" name="checkbox" type="text" value="" style="display:none !important;">
+                        <input class="letter" name="letter" type="text" value="" style="display:none !important;">
+                        <i class="fa fa-download"></i>
+                        <input class="enviar" name="enviar" disabled="disabled" type="submit" value="Descargar en PDF">
                     </td>
                 </tr>
             </table>

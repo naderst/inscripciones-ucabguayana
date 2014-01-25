@@ -41,6 +41,17 @@ h5,
 h6 {
     font-weight: lighter;
 }
+.enviar {
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    outline: none;
+    text-decoration: underline;
+}
+.enviar:hover {
+    color: #12B6EB;
+    cursor: pointer;
+}
 .estudiantes {
     border-collapse: collapse;
     border: none;
