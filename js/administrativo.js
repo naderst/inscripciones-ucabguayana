@@ -7,6 +7,7 @@ function cargarDatos() {
             $('#status').html('Error cargando información inicial de la base de datos').show();
         },
         success: function (json) {
+             
             var data_inicial = JSON.parse(json);
             var html = '';
 
@@ -50,10 +51,16 @@ function mostrarEstudiantes(estudiantes) {
                 barra_letras += '<td><a href="#' + abc[i] + '">' + abc[i] + '</a></td>';
                 lista_letras += '<option value="' + abc[i] + '">' + abc[i] + '</option>';
                 var j;
+                var flag = false;
                 var temp = '';
-                for (j = 0; j < estudiantes.length && abc[i] == estudiantes[j].apellido.charAt(0); j++)
-                    temp += '<tr><td>' + estudiantes[j].apellido + '</td><td>' + estudiantes[j].nombre + '</td><td>' + estudiantes[j].cedula + '</td></tr>';
-                if (j != 0)
+
+                for (j = 0; j < estudiantes.length; j++){
+                    if(abc[i] == estudiantes[j].apellido.charAt(0)){
+                        temp += '<tr><td>' + estudiantes[j].apellido + '</td><td>' + estudiantes[j].nombre + '</td><td>' + estudiantes[j].cedula + '</td></tr>';
+                        flag = true;
+                    }
+                }
+                if (flag)
                     html += '<tr style="border-bottom: 2px solid #FFD100"><td id="' + abc[i] + '" colspan="3">' + abc[i] + '</td></tr>' + temp;
             }
         } else {
@@ -115,6 +122,7 @@ function barraLetras(letra) {
             $('#status').html('Disculpe, no se pudo realizar su consulta, por favor intente nuevamente').show();
         },
         success: function (json) {
+             
             var estudiantes = JSON.parse(json);
             var html = '<thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th></tr></thead><tbody>';
             var i;
@@ -167,6 +175,7 @@ function comboboxLetras(letra) {
             $('#status').html('Disculpe, no se pudo realizar su consulta, por favor intente nuevamente').show();
         },
         success: function (json) {
+             
             var estudiantes = JSON.parse(json);
             var html = '<thead><tr><th>Apellido</th><th>Nombre</th><th>Cédula</th></tr></thead><tbody>';
             var i;

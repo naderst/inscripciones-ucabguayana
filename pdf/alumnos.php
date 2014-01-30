@@ -76,9 +76,14 @@ if ($_POST['checkbox'] == 'true') {
     foreach ($abc as $vabc) {
         $i;
         $temp = '';
-        for ($i = 0; $i < count($respuesta) and $vabc == substr($respuesta[$i]['apellido'], 0, 1); $i++)
-            $temp .= '<tr><td>'.$respuesta[$i]['apellido'].'</td><td>'.$respuesta[$i]['nombre'].'</td><td>'.$respuesta[$i]['cedula'].'</td></tr>';
-        if ($i != 0)
+        $flag = false;
+        for ($i = 0; $i < count($respuesta); $i++){
+            if($vabc == substr($respuesta[$i]['apellido'], 0, 1)){
+                $temp .= '<tr><td>'.$respuesta[$i]['apellido'].'</td><td>'.$respuesta[$i]['nombre'].'</td><td>'.$respuesta[$i]['cedula'].'</td></tr>';
+                $flag = true;
+            }
+        }
+        if ($flag)
             $html .= '<tr style="border-bottom: 2px solid #FFD100"><td id="'.$vabc.'" colspan="3">'.$vabc.'</td></tr>'.$temp;
     }
 } else {
